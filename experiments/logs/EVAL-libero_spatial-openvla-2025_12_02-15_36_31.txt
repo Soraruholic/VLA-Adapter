@@ -1,0 +1,3535 @@
+Task suite: libero_spatial
+Using default initial states
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=1--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 1
+# successes: 0 (0.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=2--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 2
+# successes: 0 (0.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=3--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 3
+# successes: 1 (33.3%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=4--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 4
+# successes: 1 (25.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=5--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 5
+# successes: 2 (40.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=6--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 6
+# successes: 2 (33.3%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=7--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 7
+# successes: 3 (42.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=8--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 8
+# successes: 4 (50.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=9--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 9
+# successes: 4 (44.4%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=10--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 10
+# successes: 4 (40.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=11--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 11
+# successes: 4 (36.4%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=12--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 12
+# successes: 5 (41.7%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=13--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 13
+# successes: 6 (46.2%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=14--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 14
+# successes: 6 (42.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=15--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 15
+# successes: 7 (46.7%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=16--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 16
+# successes: 8 (50.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=17--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 17
+# successes: 9 (52.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=18--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 18
+# successes: 10 (55.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=19--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 19
+# successes: 11 (57.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=20--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 20
+# successes: 12 (60.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=21--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 21
+# successes: 13 (61.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=22--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 22
+# successes: 13 (59.1%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=23--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 23
+# successes: 13 (56.5%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=24--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 24
+# successes: 13 (54.2%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=25--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 25
+# successes: 14 (56.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=26--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 26
+# successes: 14 (53.8%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=27--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 27
+# successes: 15 (55.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=28--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 28
+# successes: 16 (57.1%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=29--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 29
+# successes: 17 (58.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=30--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 30
+# successes: 18 (60.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=31--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 31
+# successes: 19 (61.3%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=32--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 32
+# successes: 19 (59.4%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=33--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 33
+# successes: 20 (60.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=34--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 34
+# successes: 20 (58.8%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=35--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 35
+# successes: 21 (60.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=36--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 36
+# successes: 21 (58.3%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=37--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 37
+# successes: 21 (56.8%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=38--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 38
+# successes: 22 (57.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=39--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 39
+# successes: 23 (59.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=40--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 40
+# successes: 24 (60.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=41--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 41
+# successes: 25 (61.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=42--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 42
+# successes: 26 (61.9%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=43--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 43
+# successes: 27 (62.8%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=44--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 44
+# successes: 28 (63.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=45--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 45
+# successes: 29 (64.4%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=46--success=False--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: False
+# episodes completed so far: 46
+# successes: 29 (63.0%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=47--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 47
+# successes: 30 (63.8%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=48--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 48
+# successes: 31 (64.6%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=49--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 49
+# successes: 32 (65.3%)
+
+Task: pick up the black bowl between the plate and the ramekin and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=50--success=True--task=pick_up_the_black_bowl_between_the_plate_and_the_r.mp4
+Success: True
+# episodes completed so far: 50
+# successes: 33 (66.0%)
+Current task success rate: 0.66
+Current total success rate: 0.66
+Using default initial states
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=51--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 51
+# successes: 34 (66.7%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=52--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 52
+# successes: 35 (67.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=53--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 53
+# successes: 35 (66.0%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=54--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 54
+# successes: 36 (66.7%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=55--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 55
+# successes: 36 (65.5%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=56--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 56
+# successes: 36 (64.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=57--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 57
+# successes: 37 (64.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=58--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 58
+# successes: 37 (63.8%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=59--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 59
+# successes: 37 (62.7%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=60--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 60
+# successes: 38 (63.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=61--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 61
+# successes: 38 (62.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=62--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 62
+# successes: 38 (61.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=63--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 63
+# successes: 38 (60.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=64--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 64
+# successes: 39 (60.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=65--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 65
+# successes: 39 (60.0%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=66--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 66
+# successes: 39 (59.1%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=67--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 67
+# successes: 39 (58.2%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=68--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 68
+# successes: 39 (57.4%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=69--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 69
+# successes: 39 (56.5%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=70--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 70
+# successes: 39 (55.7%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=71--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 71
+# successes: 39 (54.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=72--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 72
+# successes: 39 (54.2%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=73--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 73
+# successes: 39 (53.4%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=74--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 74
+# successes: 40 (54.1%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=75--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 75
+# successes: 40 (53.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=76--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 76
+# successes: 40 (52.6%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=77--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 77
+# successes: 40 (51.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=78--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 78
+# successes: 40 (51.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=79--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 79
+# successes: 41 (51.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=80--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 80
+# successes: 41 (51.2%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=81--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 81
+# successes: 41 (50.6%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=82--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 82
+# successes: 41 (50.0%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=83--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 83
+# successes: 41 (49.4%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=84--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 84
+# successes: 41 (48.8%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=85--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 85
+# successes: 41 (48.2%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=86--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 86
+# successes: 42 (48.8%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=87--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 87
+# successes: 42 (48.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=88--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 88
+# successes: 42 (47.7%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=89--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 89
+# successes: 42 (47.2%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=90--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 90
+# successes: 43 (47.8%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=91--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 91
+# successes: 43 (47.3%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=92--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 92
+# successes: 44 (47.8%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=93--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 93
+# successes: 45 (48.4%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=94--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 94
+# successes: 45 (47.9%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=95--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 95
+# successes: 46 (48.4%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=96--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 96
+# successes: 47 (49.0%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=97--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 97
+# successes: 47 (48.5%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=98--success=True--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: True
+# episodes completed so far: 98
+# successes: 48 (49.0%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=99--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 99
+# successes: 48 (48.5%)
+
+Task: pick up the black bowl next to the ramekin and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=100--success=False--task=pick_up_the_black_bowl_next_to_the_ramekin_and_pla.mp4
+Success: False
+# episodes completed so far: 100
+# successes: 48 (48.0%)
+Current task success rate: 0.3
+Current total success rate: 0.48
+Using default initial states
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=101--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 101
+# successes: 49 (48.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=102--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 102
+# successes: 49 (48.0%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=103--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 103
+# successes: 49 (47.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=104--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 104
+# successes: 49 (47.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=105--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 105
+# successes: 50 (47.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=106--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 106
+# successes: 51 (48.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=107--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 107
+# successes: 52 (48.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=108--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 108
+# successes: 52 (48.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=109--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 109
+# successes: 53 (48.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=110--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 110
+# successes: 54 (49.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=111--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 111
+# successes: 55 (49.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=112--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 112
+# successes: 56 (50.0%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=113--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 113
+# successes: 57 (50.4%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=114--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 114
+# successes: 57 (50.0%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=115--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 115
+# successes: 58 (50.4%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=116--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 116
+# successes: 59 (50.9%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=117--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 117
+# successes: 60 (51.3%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=118--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 118
+# successes: 61 (51.7%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=119--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 119
+# successes: 62 (52.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=120--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 120
+# successes: 63 (52.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=121--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 121
+# successes: 63 (52.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=122--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 122
+# successes: 64 (52.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=123--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 123
+# successes: 65 (52.8%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=124--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 124
+# successes: 66 (53.2%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=125--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 125
+# successes: 66 (52.8%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=126--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 126
+# successes: 67 (53.2%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=127--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 127
+# successes: 68 (53.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=128--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 128
+# successes: 69 (53.9%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=129--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 129
+# successes: 70 (54.3%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=130--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 130
+# successes: 71 (54.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=131--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 131
+# successes: 71 (54.2%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=132--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 132
+# successes: 72 (54.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=133--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 133
+# successes: 72 (54.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=134--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 134
+# successes: 73 (54.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=135--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 135
+# successes: 74 (54.8%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=136--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 136
+# successes: 75 (55.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=137--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 137
+# successes: 76 (55.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=138--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 138
+# successes: 77 (55.8%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=139--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 139
+# successes: 77 (55.4%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=140--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 140
+# successes: 77 (55.0%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=141--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 141
+# successes: 77 (54.6%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=142--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 142
+# successes: 78 (54.9%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=143--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 143
+# successes: 79 (55.2%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=144--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 144
+# successes: 79 (54.9%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=145--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 145
+# successes: 80 (55.2%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=146--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 146
+# successes: 81 (55.5%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=147--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 147
+# successes: 82 (55.8%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=148--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 148
+# successes: 83 (56.1%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=149--success=True--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: True
+# episodes completed so far: 149
+# successes: 84 (56.4%)
+
+Task: pick up the black bowl from table center and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=150--success=False--task=pick_up_the_black_bowl_from_table_center_and_place.mp4
+Success: False
+# episodes completed so far: 150
+# successes: 84 (56.0%)
+Current task success rate: 0.72
+Current total success rate: 0.56
+Using default initial states
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=151--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 151
+# successes: 85 (56.3%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=152--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 152
+# successes: 86 (56.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=153--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 153
+# successes: 87 (56.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=154--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 154
+# successes: 87 (56.5%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=155--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 155
+# successes: 88 (56.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=156--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 156
+# successes: 89 (57.1%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=157--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 157
+# successes: 90 (57.3%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=158--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 158
+# successes: 91 (57.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=159--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 159
+# successes: 91 (57.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=160--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 160
+# successes: 92 (57.5%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=161--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 161
+# successes: 93 (57.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=162--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 162
+# successes: 94 (58.0%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=163--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 163
+# successes: 94 (57.7%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=164--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 164
+# successes: 95 (57.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=165--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 165
+# successes: 96 (58.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=166--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 166
+# successes: 97 (58.4%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=167--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 167
+# successes: 98 (58.7%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=168--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 168
+# successes: 99 (58.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=169--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 169
+# successes: 99 (58.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=170--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 170
+# successes: 100 (58.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=171--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 171
+# successes: 101 (59.1%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=172--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 172
+# successes: 102 (59.3%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=173--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 173
+# successes: 103 (59.5%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=174--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 174
+# successes: 104 (59.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=175--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 175
+# successes: 105 (60.0%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=176--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 176
+# successes: 106 (60.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=177--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 177
+# successes: 106 (59.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=178--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 178
+# successes: 106 (59.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=179--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 179
+# successes: 107 (59.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=180--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 180
+# successes: 108 (60.0%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=181--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 181
+# successes: 109 (60.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=182--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 182
+# successes: 110 (60.4%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=183--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 183
+# successes: 111 (60.7%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=184--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 184
+# successes: 112 (60.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=185--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 185
+# successes: 113 (61.1%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=186--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 186
+# successes: 114 (61.3%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=187--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 187
+# successes: 115 (61.5%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=188--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 188
+# successes: 115 (61.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=189--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 189
+# successes: 116 (61.4%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=190--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 190
+# successes: 117 (61.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=191--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 191
+# successes: 118 (61.8%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=192--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 192
+# successes: 119 (62.0%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=193--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 193
+# successes: 120 (62.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=194--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 194
+# successes: 120 (61.9%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=195--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 195
+# successes: 121 (62.1%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=196--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 196
+# successes: 122 (62.2%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=197--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 197
+# successes: 123 (62.4%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=198--success=True--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: True
+# episodes completed so far: 198
+# successes: 124 (62.6%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=199--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 199
+# successes: 124 (62.3%)
+
+Task: pick up the black bowl on the cookie box and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=200--success=False--task=pick_up_the_black_bowl_on_the_cookie_box_and_place.mp4
+Success: False
+# episodes completed so far: 200
+# successes: 124 (62.0%)
+Current task success rate: 0.8
+Current total success rate: 0.62
+Using default initial states
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=201--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 201
+# successes: 125 (62.2%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=202--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 202
+# successes: 126 (62.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=203--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 203
+# successes: 126 (62.1%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=204--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 204
+# successes: 127 (62.3%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=205--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 205
+# successes: 128 (62.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=206--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 206
+# successes: 129 (62.6%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=207--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 207
+# successes: 129 (62.3%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=208--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 208
+# successes: 129 (62.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=209--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 209
+# successes: 130 (62.2%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=210--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 210
+# successes: 131 (62.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=211--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 211
+# successes: 131 (62.1%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=212--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 212
+# successes: 131 (61.8%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=213--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 213
+# successes: 132 (62.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=214--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 214
+# successes: 133 (62.1%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=215--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 215
+# successes: 133 (61.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=216--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 216
+# successes: 134 (62.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=217--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 217
+# successes: 134 (61.8%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=218--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 218
+# successes: 135 (61.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=219--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 219
+# successes: 135 (61.6%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=220--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 220
+# successes: 135 (61.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=221--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 221
+# successes: 136 (61.5%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=222--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 222
+# successes: 137 (61.7%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=223--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 223
+# successes: 138 (61.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=224--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 224
+# successes: 138 (61.6%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=225--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 225
+# successes: 138 (61.3%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=226--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 226
+# successes: 138 (61.1%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=227--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 227
+# successes: 138 (60.8%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=228--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 228
+# successes: 139 (61.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=229--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 229
+# successes: 140 (61.1%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=230--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 230
+# successes: 140 (60.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=231--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 231
+# successes: 141 (61.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=232--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 232
+# successes: 142 (61.2%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=233--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 233
+# successes: 142 (60.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=234--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 234
+# successes: 142 (60.7%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=235--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 235
+# successes: 143 (60.9%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=236--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 236
+# successes: 144 (61.0%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=237--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 237
+# successes: 145 (61.2%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=238--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 238
+# successes: 146 (61.3%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=239--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 239
+# successes: 147 (61.5%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=240--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 240
+# successes: 148 (61.7%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=241--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 241
+# successes: 148 (61.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=242--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 242
+# successes: 149 (61.6%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=243--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 243
+# successes: 150 (61.7%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=244--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 244
+# successes: 150 (61.5%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=245--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 245
+# successes: 151 (61.6%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=246--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 246
+# successes: 152 (61.8%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=247--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 247
+# successes: 152 (61.5%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=248--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 248
+# successes: 153 (61.7%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=249--success=False--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: False
+# episodes completed so far: 249
+# successes: 153 (61.4%)
+
+Task: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=250--success=True--task=pick_up_the_black_bowl_in_the_top_drawer_of_the_wo.mp4
+Success: True
+# episodes completed so far: 250
+# successes: 154 (61.6%)
+Current task success rate: 0.6
+Current total success rate: 0.616
+Using default initial states
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=251--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 251
+# successes: 155 (61.8%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=252--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 252
+# successes: 156 (61.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=253--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 253
+# successes: 156 (61.7%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=254--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 254
+# successes: 157 (61.8%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=255--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 255
+# successes: 158 (62.0%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=256--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 256
+# successes: 158 (61.7%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=257--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 257
+# successes: 158 (61.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=258--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 258
+# successes: 159 (61.6%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=259--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 259
+# successes: 160 (61.8%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=260--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 260
+# successes: 161 (61.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=261--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 261
+# successes: 162 (62.1%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=262--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 262
+# successes: 163 (62.2%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=263--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 263
+# successes: 164 (62.4%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=264--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 264
+# successes: 165 (62.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=265--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 265
+# successes: 165 (62.3%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=266--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 266
+# successes: 166 (62.4%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=267--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 267
+# successes: 167 (62.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=268--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 268
+# successes: 167 (62.3%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=269--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 269
+# successes: 167 (62.1%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=270--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 270
+# successes: 168 (62.2%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=271--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 271
+# successes: 169 (62.4%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=272--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 272
+# successes: 170 (62.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=273--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 273
+# successes: 171 (62.6%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=274--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 274
+# successes: 172 (62.8%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=275--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 275
+# successes: 173 (62.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=276--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 276
+# successes: 174 (63.0%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=277--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 277
+# successes: 175 (63.2%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=278--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 278
+# successes: 175 (62.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=279--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 279
+# successes: 176 (63.1%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=280--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 280
+# successes: 177 (63.2%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=281--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 281
+# successes: 178 (63.3%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=282--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 282
+# successes: 179 (63.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=283--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 283
+# successes: 180 (63.6%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=284--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 284
+# successes: 181 (63.7%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=285--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 285
+# successes: 182 (63.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=286--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 286
+# successes: 183 (64.0%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=287--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 287
+# successes: 184 (64.1%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=288--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 288
+# successes: 184 (63.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=289--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 289
+# successes: 185 (64.0%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=290--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 290
+# successes: 185 (63.8%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=291--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 291
+# successes: 186 (63.9%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=292--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 292
+# successes: 187 (64.0%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=293--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 293
+# successes: 188 (64.2%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=294--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 294
+# successes: 189 (64.3%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=295--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 295
+# successes: 190 (64.4%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=296--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 296
+# successes: 191 (64.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=297--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 297
+# successes: 191 (64.3%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=298--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 298
+# successes: 192 (64.4%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=299--success=True--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: True
+# episodes completed so far: 299
+# successes: 193 (64.5%)
+
+Task: pick up the black bowl on the ramekin and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=300--success=False--task=pick_up_the_black_bowl_on_the_ramekin_and_place_it.mp4
+Success: False
+# episodes completed so far: 300
+# successes: 193 (64.3%)
+Current task success rate: 0.78
+Current total success rate: 0.6433333333333333
+Using default initial states
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=301--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 301
+# successes: 193 (64.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=302--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 302
+# successes: 193 (63.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=303--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 303
+# successes: 193 (63.7%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=304--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 304
+# successes: 193 (63.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=305--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 305
+# successes: 193 (63.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=306--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 306
+# successes: 193 (63.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=307--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 307
+# successes: 193 (62.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=308--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 308
+# successes: 193 (62.7%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=309--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 309
+# successes: 193 (62.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=310--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 310
+# successes: 193 (62.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=311--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 311
+# successes: 193 (62.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=312--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 312
+# successes: 193 (61.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=313--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 313
+# successes: 193 (61.7%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=314--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 314
+# successes: 193 (61.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=315--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 315
+# successes: 193 (61.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=316--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 316
+# successes: 193 (61.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=317--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 317
+# successes: 193 (60.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=318--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 318
+# successes: 193 (60.7%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=319--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 319
+# successes: 193 (60.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=320--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 320
+# successes: 193 (60.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=321--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 321
+# successes: 193 (60.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=322--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 322
+# successes: 193 (59.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=323--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 323
+# successes: 193 (59.8%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=324--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 324
+# successes: 193 (59.6%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=325--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 325
+# successes: 193 (59.4%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=326--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 326
+# successes: 193 (59.2%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=327--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 327
+# successes: 193 (59.0%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=328--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 328
+# successes: 193 (58.8%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=329--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 329
+# successes: 193 (58.7%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=330--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 330
+# successes: 193 (58.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=331--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 331
+# successes: 193 (58.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=332--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 332
+# successes: 193 (58.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=333--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 333
+# successes: 193 (58.0%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=334--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 334
+# successes: 193 (57.8%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=335--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 335
+# successes: 193 (57.6%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=336--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 336
+# successes: 193 (57.4%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=337--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 337
+# successes: 193 (57.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=338--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 338
+# successes: 193 (57.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=339--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 339
+# successes: 193 (56.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=340--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 340
+# successes: 193 (56.8%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=341--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 341
+# successes: 193 (56.6%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=342--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 342
+# successes: 193 (56.4%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=343--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 343
+# successes: 193 (56.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=344--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 344
+# successes: 193 (56.1%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=345--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 345
+# successes: 193 (55.9%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=346--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 346
+# successes: 193 (55.8%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=347--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 347
+# successes: 193 (55.6%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=348--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 348
+# successes: 193 (55.5%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=349--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 349
+# successes: 193 (55.3%)
+
+Task: pick up the black bowl next to the cookie box and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=350--success=False--task=pick_up_the_black_bowl_next_to_the_cookie_box_and_.mp4
+Success: False
+# episodes completed so far: 350
+# successes: 193 (55.1%)
+Current task success rate: 0.0
+Current total success rate: 0.5514285714285714
+Using default initial states
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=351--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 351
+# successes: 194 (55.3%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=352--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 352
+# successes: 195 (55.4%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=353--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 353
+# successes: 196 (55.5%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=354--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 354
+# successes: 197 (55.6%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=355--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 355
+# successes: 198 (55.8%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=356--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 356
+# successes: 199 (55.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=357--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 357
+# successes: 200 (56.0%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=358--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 358
+# successes: 201 (56.1%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=359--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 359
+# successes: 202 (56.3%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=360--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 360
+# successes: 203 (56.4%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=361--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 361
+# successes: 204 (56.5%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=362--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 362
+# successes: 205 (56.6%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=363--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 363
+# successes: 206 (56.7%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=364--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 364
+# successes: 207 (56.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=365--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 365
+# successes: 208 (57.0%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=366--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 366
+# successes: 209 (57.1%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=367--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 367
+# successes: 210 (57.2%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=368--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 368
+# successes: 211 (57.3%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=369--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 369
+# successes: 212 (57.5%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=370--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 370
+# successes: 213 (57.6%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=371--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 371
+# successes: 214 (57.7%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=372--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 372
+# successes: 215 (57.8%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=373--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 373
+# successes: 216 (57.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=374--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 374
+# successes: 217 (58.0%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=375--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 375
+# successes: 218 (58.1%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=376--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 376
+# successes: 219 (58.2%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=377--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 377
+# successes: 220 (58.4%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=378--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 378
+# successes: 221 (58.5%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=379--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 379
+# successes: 222 (58.6%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=380--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 380
+# successes: 223 (58.7%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=381--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 381
+# successes: 224 (58.8%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=382--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 382
+# successes: 225 (58.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=383--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 383
+# successes: 226 (59.0%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=384--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 384
+# successes: 227 (59.1%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=385--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 385
+# successes: 228 (59.2%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=386--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 386
+# successes: 229 (59.3%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=387--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 387
+# successes: 230 (59.4%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=388--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 388
+# successes: 231 (59.5%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=389--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 389
+# successes: 232 (59.6%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=390--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 390
+# successes: 233 (59.7%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=391--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 391
+# successes: 234 (59.8%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=392--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 392
+# successes: 235 (59.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=393--success=False--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: False
+# episodes completed so far: 393
+# successes: 235 (59.8%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=394--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 394
+# successes: 236 (59.9%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=395--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 395
+# successes: 237 (60.0%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=396--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 396
+# successes: 238 (60.1%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=397--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 397
+# successes: 239 (60.2%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=398--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 398
+# successes: 240 (60.3%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=399--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 399
+# successes: 241 (60.4%)
+
+Task: pick up the black bowl on the stove and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=400--success=True--task=pick_up_the_black_bowl_on_the_stove_and_place_it_o.mp4
+Success: True
+# episodes completed so far: 400
+# successes: 242 (60.5%)
+Current task success rate: 0.98
+Current total success rate: 0.605
+Using default initial states
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=401--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 401
+# successes: 243 (60.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=402--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 402
+# successes: 244 (60.7%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=403--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 403
+# successes: 244 (60.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=404--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 404
+# successes: 245 (60.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=405--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 405
+# successes: 246 (60.7%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=406--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 406
+# successes: 246 (60.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=407--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 407
+# successes: 246 (60.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=408--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 408
+# successes: 247 (60.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=409--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 409
+# successes: 247 (60.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=410--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 410
+# successes: 247 (60.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=411--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 411
+# successes: 247 (60.1%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=412--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 412
+# successes: 247 (60.0%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=413--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 413
+# successes: 247 (59.8%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=414--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 414
+# successes: 248 (59.9%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=415--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 415
+# successes: 248 (59.8%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=416--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 416
+# successes: 248 (59.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=417--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 417
+# successes: 249 (59.7%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=418--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 418
+# successes: 250 (59.8%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=419--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 419
+# successes: 250 (59.7%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=420--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 420
+# successes: 250 (59.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=421--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 421
+# successes: 250 (59.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=422--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 422
+# successes: 250 (59.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=423--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 423
+# successes: 251 (59.3%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=424--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 424
+# successes: 251 (59.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=425--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 425
+# successes: 251 (59.1%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=426--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 426
+# successes: 251 (58.9%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=427--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 427
+# successes: 251 (58.8%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=428--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 428
+# successes: 251 (58.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=429--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 429
+# successes: 251 (58.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=430--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 430
+# successes: 251 (58.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=431--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 431
+# successes: 251 (58.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=432--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 432
+# successes: 251 (58.1%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=433--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 433
+# successes: 252 (58.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=434--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 434
+# successes: 253 (58.3%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=435--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 435
+# successes: 253 (58.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=436--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 436
+# successes: 253 (58.0%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=437--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 437
+# successes: 253 (57.9%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=438--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 438
+# successes: 254 (58.0%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=439--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 439
+# successes: 254 (57.9%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=440--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 440
+# successes: 254 (57.7%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=441--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 441
+# successes: 254 (57.6%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=442--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 442
+# successes: 254 (57.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=443--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 443
+# successes: 254 (57.3%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=444--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 444
+# successes: 255 (57.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=445--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 445
+# successes: 256 (57.5%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=446--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 446
+# successes: 256 (57.4%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=447--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 447
+# successes: 256 (57.3%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=448--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 448
+# successes: 256 (57.1%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=449--success=True--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: True
+# episodes completed so far: 449
+# successes: 257 (57.2%)
+
+Task: pick up the black bowl next to the plate and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=450--success=False--task=pick_up_the_black_bowl_next_to_the_plate_and_place.mp4
+Success: False
+# episodes completed so far: 450
+# successes: 257 (57.1%)
+Current task success rate: 0.3
+Current total success rate: 0.5711111111111111
+Using default initial states
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 1...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=451--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 451
+# successes: 257 (57.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 2...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=452--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 452
+# successes: 257 (56.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 3...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=453--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 453
+# successes: 257 (56.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 4...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=454--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 454
+# successes: 257 (56.6%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 5...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=455--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 455
+# successes: 257 (56.5%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 6...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=456--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 456
+# successes: 257 (56.4%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 7...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=457--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 457
+# successes: 257 (56.2%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 8...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=458--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 458
+# successes: 257 (56.1%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 9...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=459--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 459
+# successes: 257 (56.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 10...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=460--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 460
+# successes: 257 (55.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 11...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=461--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 461
+# successes: 257 (55.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 12...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=462--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 462
+# successes: 257 (55.6%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 13...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=463--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 463
+# successes: 257 (55.5%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 14...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=464--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 464
+# successes: 257 (55.4%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 15...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=465--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 465
+# successes: 257 (55.3%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 16...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=466--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 466
+# successes: 257 (55.2%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 17...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=467--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 467
+# successes: 257 (55.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 18...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=468--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 468
+# successes: 257 (54.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 19...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=469--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 469
+# successes: 257 (54.8%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 20...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=470--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 470
+# successes: 257 (54.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 21...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=471--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 471
+# successes: 257 (54.6%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 22...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=472--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 472
+# successes: 257 (54.4%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 23...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=473--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 473
+# successes: 257 (54.3%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 24...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=474--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 474
+# successes: 257 (54.2%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 25...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=475--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 475
+# successes: 257 (54.1%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 26...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=476--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 476
+# successes: 257 (54.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 27...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=477--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 477
+# successes: 257 (53.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 28...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=478--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 478
+# successes: 257 (53.8%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 29...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=479--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 479
+# successes: 257 (53.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 30...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=480--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 480
+# successes: 257 (53.5%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 31...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=481--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 481
+# successes: 257 (53.4%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 32...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=482--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 482
+# successes: 257 (53.3%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 33...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=483--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 483
+# successes: 257 (53.2%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 34...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=484--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 484
+# successes: 257 (53.1%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 35...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=485--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 485
+# successes: 257 (53.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 36...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=486--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 486
+# successes: 257 (52.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 37...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=487--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 487
+# successes: 257 (52.8%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 38...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=488--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 488
+# successes: 257 (52.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 39...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=489--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 489
+# successes: 257 (52.6%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 40...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=490--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 490
+# successes: 257 (52.4%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 41...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=491--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 491
+# successes: 257 (52.3%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 42...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=492--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 492
+# successes: 257 (52.2%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 43...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=493--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 493
+# successes: 257 (52.1%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 44...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=494--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 494
+# successes: 257 (52.0%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 45...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=495--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 495
+# successes: 257 (51.9%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 46...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=496--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 496
+# successes: 257 (51.8%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 47...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=497--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 497
+# successes: 257 (51.7%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 48...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=498--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 498
+# successes: 257 (51.6%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 49...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=499--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 499
+# successes: 257 (51.5%)
+
+Task: pick up the black bowl on the wooden cabinet and place it on the plate
+Starting episode 50...
+Saved rollout MP4 at path ./rollouts/vla-adapter/2025_12_02/2025_12_02-15_36_31--episode=500--success=False--task=pick_up_the_black_bowl_on_the_wooden_cabinet_and_p.mp4
+Success: False
+# episodes completed so far: 500
+# successes: 257 (51.4%)
+Current task success rate: 0.0
+Current total success rate: 0.514
+Final results:
+Total episodes: 500
+Total successes: 257
+Overall success rate: 0.5140 (51.4%)

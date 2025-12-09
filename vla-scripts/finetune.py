@@ -58,7 +58,7 @@ from prismatic.vla.datasets import RLDSDataset, RLDSBatchTransform
 from prismatic.vla.datasets.rlds.utils.data_utils import save_dataset_statistics
 from prismatic.models import load, load_vla
 
-
+from prismatic.models.projectors import AlignProjector
 
 # Sane Defaults
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -127,6 +127,16 @@ class FinetuneConfig:
     phase: str = "Training"
     # fmt: on
 
+    # ========== [SPATIAL FORCING] Configuration Parameters ==========
+    vggt_path: str = "/home/icrlab02/vla_ws/VLA-Adapter/pretrained_models/vggt/model.pt"  # Path to VGGT model for spatial alignment
+    use_spatial_forcing: bool = False                # If True, enables VGGT spatial feature alignment
+    align_loss_type: str = "cosine"                  # Loss function for alignment (cosine)
+    align_loss_coeff: float = 0.5                    # Coefficient for alignment loss
+    vla_layers_align: int = 18                       # Which layer of VLA hidden state to align (0-indexed)
+    vggt_layers_align: int = -1                      # Which layer of VGGT hidden state to align (0-indexed)
+    pooling_func: str = "bilinear"                   # Resize method for VGGT to VLA pixels (bilinear, nearest)
+    use_vlm_norm: bool = False                       # Whether to use VLM normalization for vision embeddings
+    use_vggt_pe: bool = True                         # Whether to use position embedding for VGGT
 
 
 def remove_ddp_in_checkpoint(state_dict) -> dict:
@@ -298,6 +308,11 @@ def run_forward_pass(
     num_patches,
     compute_diffusion_l1=False,
     use_pro_version=True,
+    vggt=None,
+    align_projector=None,
+    preprocess_normed_images=None,
+    custom_pooling=None,
+    processor=None,
     cfg=None
 ) -> Tuple[torch.Tensor, Dict[str, float]]:
     """
@@ -415,11 +430,60 @@ def run_forward_pass(
             phase=cfg.phase,
             )
 
-        loss = torch.nn.L1Loss()(predicted_actions, ground_truth_actions)
-
+        action_loss = torch.nn.L1Loss()(predicted_actions, ground_truth_actions)
+        
+        # ========== [SPATIAL FORCING] Second Layer Selection: Alignment Loss ==========
+        align_loss = torch.tensor(0.0, device=device_id)
+        
+        if cfg is not None and cfg.use_spatial_forcing and vggt is not None and align_projector is not None:
+            # Extract single layer from VLA for alignment (different from the 24 layers used above)
+            vla_hidden_for_align = output.hidden_states[cfg.vla_layers_align]  # [bs, seq_len, hidden_dim]
+            
+            # Extract vision tokens (skip BOS token and language tokens)
+            vision_length = num_patches
+            boi_ids = 1  # Begin of image token index
+            vision_hidden = vla_hidden_for_align[:, boi_ids:boi_ids + vision_length, :].clone()
+            
+            # Extract VGGT features
+            vggt.eval()
+            unnorm_imgs = preprocess_normed_images(
+                batch['pixel_values'], 
+                processor.image_processor,
+                num_images_in_input=cfg.num_images_in_input
+            ).to(device_id)
+            
+            with torch.autocast("cuda", dtype=torch.bfloat16), torch.no_grad():
+                vggt_output = vggt(unnorm_imgs)
+            
+            # Extract specific layer from VGGT
+            agg_vggt_hidden = vggt_output["features"][cfg.vggt_layers_align]
+            patch_start_idx = vggt_output["patch_start_idx"]
+            vggt_hidden = agg_vggt_hidden[:, :, patch_start_idx:, :]
+            
+            # Spatial resampling to match VLA's vision token layout
+            original_img = vggt_output["images"]
+            H, W = original_img.shape[-2:]
+            patch_h, patch_w = H // vggt.patch_size, W // vggt.patch_size
+            vggt_hidden = custom_pooling(
+                vggt_hidden, 
+                (patch_h, patch_w), 
+                (H, W), 
+                vision_hidden,
+                cfg.pooling_func,
+                cfg.use_vggt_pe
+            )
+            
+            # Compute alignment loss
+            align_loss = align_projector(vision_hidden, vggt_hidden)
+        # ========== [END SPATIAL FORCING ALIGNMENT] ==========
+        
+        loss = action_loss + (cfg.align_loss_coeff if (cfg and cfg.use_spatial_forcing) else 0.0) * align_loss
+        
         metrics.update(
             {
                 "loss_value": loss.item(),  # Detached value for logging
+                "action_loss": action_loss.item(),  # ========== [SPATIAL FORCING] Add action_loss to metrics ==========
+                "align_loss": align_loss.item() if (cfg and cfg.use_spatial_forcing) else 0.0,  # ========== [SPATIAL FORCING] Add align_loss to metrics ==========
             }
         )
 
@@ -503,6 +567,7 @@ def save_training_checkpoint(
     train_dataset,
     distributed_state,
     new_state_dict,
+    align_projector=None
     
 ) -> None:
     """
@@ -565,6 +630,13 @@ def save_training_checkpoint(
         if cfg.use_l1_regression and action_head is not None:
             torch.save(action_head.state_dict(), checkpoint_dir / f"action_head--{checkpoint_name_suffix}")
 
+        # ========== [SPATIAL FORCING] Save AlignProjector ==========
+        if cfg.use_spatial_forcing and align_projector is not None:
+            torch.save(get_module(align_projector).state_dict(), checkpoint_dir / f"align_projector--{checkpoint_name_suffix}")
+            print(f"[SPATIAL FORCING] Saved AlignProjector checkpoint")
+        # ========== [END SPATIAL FORCING CHECKPOINT] ==========
+
+
         if cfg.use_film:
             # To be safe, just save the entire vision backbone (not just FiLM components)
             torch.save(
@@ -615,6 +687,11 @@ def run_validation(
     log_step,
     distributed_state,
     val_time_limit,
+    vggt=None,
+    align_projector=None,
+    preprocess_normed_images=None,
+    custom_pooling=None,
+    processor=None,
 ) -> None:
     """
     Compute validation set metrics for logging.
@@ -658,7 +735,13 @@ def run_validation(
                 use_film=cfg.use_film,
                 num_patches=num_patches,
                 compute_diffusion_l1=True,
-                use_pro_version=cfg.use_pro_version
+                use_pro_version=cfg.use_pro_version,
+                cfg=cfg,  # 新增
+                vggt=vggt,
+                align_projector=align_projector,
+                preprocess_normed_images=preprocess_normed_images,
+                custom_pooling=custom_pooling,
+                processor=processor,
             )
 
             # Add the loss value to the metrics
@@ -829,6 +912,71 @@ def finetune(cfg: FinetuneConfig) -> None:
 
     # vla.set_version(cfg.version)
 
+    # ========== [SPATIAL FORCING] Initialize VGGT and AlignProjector ==========
+    vggt = None
+    align_projector = None
+    preprocess_normed_images = None
+    custom_pooling = None
+    
+    if cfg.use_spatial_forcing:
+        # Import SF-related modules from local spatial_forcing_components
+        # Add to sys.path temporarily for imports only
+        import sys
+        from pathlib import Path
+        _sf_components_path = str(Path(__file__).parent.parent / "spatial_forcing_components")
+        if _sf_components_path not in sys.path:
+            sys.path.insert(0, _sf_components_path)
+        
+        try:
+            if distributed_state.is_main_process:
+                print(f"[SPATIAL FORCING] Initializing Spatial Forcing components...")
+                print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, VGGT_layer={cfg.vggt_layers_align}, loss_coeff={cfg.align_loss_coeff}")
+            
+            # Import from local spatial_forcing_components
+            from prismatic.models.projectors import AlignProjector
+            from vggt.models.vggt import VGGT
+            from vggt.utils.load_fn import preprocess_normed_images
+            from prismatic.util.pooling_utils import custom_pooling
+        finally:
+            # Remove from sys.path immediately after import
+            if _sf_components_path in sys.path:
+                sys.path.remove(_sf_components_path)
+        
+        # Initialize VGGT model
+        vggt = VGGT(
+            enable_camera=False,
+            enable_point=False,
+            enable_depth=False,
+            enable_track=False,
+            feature_only=True,
+        )
+        vggt.load_state_dict(torch.load(cfg.vggt_path, map_location='cpu'), strict=False)
+        vggt = vggt.to(device_id)
+        vggt.eval()
+        for param in vggt.parameters():
+            param.requires_grad = False
+        
+        if distributed_state.is_main_process:
+            print(f"[SPATIAL FORCING] VGGT loaded from: {cfg.vggt_path}")
+        
+        # Initialize AlignProjector
+        llm_hidden_size = get_module(vla).llm_dim
+        vggt_hidden_size = 1024  # VGGT feature dimension
+        
+        align_projector = AlignProjector(
+            llm_dim=llm_hidden_size,
+            vggt_dim=vggt_hidden_size,
+            align_loss_type=cfg.align_loss_type
+        ).to(device_id)
+        
+        if distributed_state.num_processes > 1:
+            align_projector = DDP(align_projector, device_ids=[device_id])
+        
+        if distributed_state.is_main_process:
+            print(f"[SPATIAL FORCING] AlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
+            print(f"[SPATIAL FORCING] Alignment loss type: {cfg.align_loss_type}")
+    # ========== [END SPATIAL FORCING] ==========
+
     if cfg.use_lora:
         lora_config = LoraConfig(
             r=cfg.lora_rank,
@@ -906,6 +1054,12 @@ def finetune(cfg: FinetuneConfig) -> None:
 
     if cfg.use_proprio:
         trainable_params += [param for param in proprio_projector.parameters() if param.requires_grad]
+    
+    # ========== [SPATIAL FORCING] Add AlignProjector parameters to optimizer ==========
+    if cfg.use_spatial_forcing and align_projector is not None:
+        trainable_params += [param for param in align_projector.parameters() if param.requires_grad]
+    # ========== [END SPATIAL FORCING] ==========
+    
     print(f"# total trainable params: {sum(p.numel() for p in trainable_params)}")
     optimizer = AdamW(trainable_params, lr=cfg.learning_rate)
 
@@ -1033,6 +1187,11 @@ def finetune(cfg: FinetuneConfig) -> None:
                 compute_diffusion_l1=compute_diffusion_l1,
                 use_pro_version=cfg.use_pro_version,
                 cfg=cfg,
+                vggt=vggt if cfg.use_spatial_forcing else None,
+                align_projector=align_projector if cfg.use_spatial_forcing else None,
+                preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
+                custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
+                processor=processor,
             )
 
             # Normalize loss to account for gradient accumulation
@@ -1095,6 +1254,7 @@ def finetune(cfg: FinetuneConfig) -> None:
                     train_dataset=train_dataset,
                     distributed_state=distributed_state,
                     new_state_dict=RAW_STATE_DICT,
+                    align_projector=align_projector if cfg.use_spatial_forcing else None,
                 )
 
             # Test model on validation set
@@ -1112,6 +1272,11 @@ def finetune(cfg: FinetuneConfig) -> None:
                     log_step=log_step,
                     distributed_state=distributed_state,
                     val_time_limit=cfg.val_time_limit,
+                    vggt=vggt if cfg.use_spatial_forcing else None,
+                    align_projector=align_projector if cfg.use_spatial_forcing else None,
+                    preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
+                    custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
+                    processor=processor,
                 )
                 # Set model back to training mode after validation
                 vla.train()
@@ -1121,6 +1286,18 @@ def finetune(cfg: FinetuneConfig) -> None:
                 print(f"Max step {cfg.max_steps} reached! Stopping training...")
                 break
 
+
+def get_module(model):
+    """
+    Get the underlying module from a model, unwrapping DDP if necessary.
+    
+    Args:
+        model: PyTorch model, possibly wrapped with DDP
+        
+    Returns:
+        The underlying module without DDP wrapper
+    """
+    return model.module if hasattr(model, 'module') else model
 
 if __name__ == "__main__":
     finetune()

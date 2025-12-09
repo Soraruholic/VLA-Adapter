@@ -30,6 +30,7 @@ from experiments.robot.libero.libero_utils import (
     get_libero_wrist_image,
     quat2axisangle,
     save_rollout_video,
+    set_env_perturbation,
 )
 from experiments.robot.openvla_utils import (
     get_action_head,
@@ -112,6 +113,39 @@ class GenerateConfig:
     env_img_res: int = 256                           # Resolution for environment images (not policy input resolution)
 
     #################################################################################################################
+    # Environment Perturbation Settings (for robustness evaluation)
+    # Unit: meters (m) for position, degrees for rotation (RPY)
+    # Note: Use comma-separated values, e.g., "0.1,0.0,0.05" or "-0.1,0.0,0.0" for negative
+    #################################################################################################################
+    # Agentview camera (third-person fixed camera)
+    # Default: pos=(0.5886, 0.0, 1.4903), looking at the table
+    agentview_pos_offset: str = "0.0,0.0,0.0"        # "x,y,z" offset in meters (supports negative)
+                                                     #   x: +far from table, -close to table
+                                                     #   y: +left, -right
+                                                     #   z: +higher, -lower
+    agentview_rpy_offset: str = "0.0,0.0,0.0"        # "roll,pitch,yaw" offset in DEGREES (supports negative)
+                                                     #   roll:  rotation around x-axis (tilting left/right)
+                                                     #   pitch: rotation around y-axis (tilting up/down)
+                                                     #   yaw:   rotation around z-axis (rotating left/right)
+    
+    # Wrist camera (robot0_eye_in_hand, mounted on gripper)
+    # Default: pos=(0.05, 0.0, 0.0) relative to gripper, looking forward
+    wrist_cam_pos_offset: str = "0.0,0.0,0.0"        # "x,y,z" offset in meters (supports negative)
+                                                     #   x: +forward, -backward (gripper direction)
+                                                     #   y: +left, -right
+                                                     #   z: +up, -down
+    wrist_cam_rpy_offset: str = "0.0,0.0,0.0"        # "roll,pitch,yaw" offset in DEGREES (supports negative)
+    
+    # Table height offset
+    table_height_offset: float = 0.0                 # Offset for table height (meters)
+                                                     #   positive = higher table, negative = lower table
+                                                     #   Default table height is 0.8m
+    
+    # Debug settings
+    debug_save_input_images: bool = False            # Save input images for debugging
+    debug_image_save_freq: int = 10                  # Save every N steps
+
+    #################################################################################################################
     # Utils
     #################################################################################################################
     run_id_note: Optional[str] = None                # Extra note to add to end of run ID for logging
@@ -148,7 +182,47 @@ def initialize_model(cfg: GenerateConfig):
     """Initialize model and associated components."""
     # Load model
     model = get_model(cfg)
+    
+    # # ========== [SPATIAL FORCING] Apply LoRA adapter if present ==========
+    # # Determine checkpoint path for LoRA and other components
+    # # If finetuned_checkpoint is provided, use it; otherwise use pretrained_checkpoint
+    # component_checkpoint = cfg.finetuned_checkpoint if cfg.finetuned_checkpoint else cfg.pretrained_checkpoint
+    
+    # # Check if checkpoint directory contains lora_adapter/
+    # lora_adapter_path = Path(component_checkpoint) / "lora_adapter"
+    # if lora_adapter_path.exists():
+    #     print(f"\n{'='*80}")
+    #     print(f"[EVAL] Detected LoRA adapter at: {lora_adapter_path}")
+    #     print(f"[EVAL] Applying LoRA weights to base model...")
+    #     print(f"{'='*80}\n")
+        
+    #     from peft import PeftModel
+        
+    #     # Apply LoRA adapter to the base model
+    #     model = PeftModel.from_pretrained(model, str(lora_adapter_path))
+        
+    #     # Merge and unload for faster inference (optional but recommended)
+    #     # This fuses LoRA weights into the base model
+    #     print("[EVAL] Merging LoRA weights for faster inference...")
+    #     model = model.merge_and_unload()
+        
+    #     print(f"\n{'='*80}")
+    #     print(f"[EVAL] LoRA adapter successfully applied and merged!")
+    #     print(f"{'='*80}\n")
+    # else:
+    #     print(f"\n[EVAL] No LoRA adapter found at {lora_adapter_path}, using base model as-is\n")
+    # # ========== [END SPATIAL FORCING] ==========
+    
     model.set_version(cfg.save_version)
+    
+    # # ========== [SPATIAL FORCING] Override checkpoint path for loading components ==========
+    # # Temporarily override cfg.pretrained_checkpoint to load components from finetuned checkpoint
+    # original_checkpoint = cfg.pretrained_checkpoint
+    # if cfg.finetuned_checkpoint:
+    #     print(f"[EVAL] Loading action head and proprio projector from: {cfg.finetuned_checkpoint}\n")
+    #     cfg.pretrained_checkpoint = cfg.finetuned_checkpoint
+    # # ========== [END SPATIAL FORCING] ==========
+    
     # Load proprio projector if needed
     proprio_projector = None
     if cfg.use_proprio:
@@ -292,10 +366,16 @@ def run_episode(
     noisy_action_projector=None,
     initial_state=None,
     log_file=None,
+    episode_idx=0,
 ):
     """Run a single episode in the environment."""
+    from experiments.robot.libero.libero_utils import _apply_camera_perturbation_to_env
+    
     # Reset environment
     env.reset()
+    
+    # Re-apply camera perturbation after reset (reset restores default camera positions)
+    _apply_camera_perturbation_to_env(env)
 
     # Set initial state if provided
     if initial_state is not None:
@@ -303,12 +383,42 @@ def run_episode(
     else:
         obs = env.get_observation()
 
+    # Debug: Print camera info on first episode
+    if episode_idx == 0 and hasattr(env, 'env'):
+        try:
+            sim = env.env.sim
+            # Print agentview camera info
+            agentview_cam_id = sim.model.camera_name2id("agentview")
+            agentview_pos = sim.model.cam_pos[agentview_cam_id]
+            agentview_quat = sim.model.cam_quat[agentview_cam_id]
+            print(f"[DEBUG CAMERA] agentview position: {agentview_pos}")
+            print(f"[DEBUG CAMERA] agentview quaternion: {agentview_quat}")
+            
+            # Print eye_in_hand camera info if exists
+            try:
+                wrist_cam_id = sim.model.camera_name2id("robot0_eye_in_hand")
+                wrist_pos = sim.model.cam_pos[wrist_cam_id]
+                wrist_quat = sim.model.cam_quat[wrist_cam_id]
+                print(f"[DEBUG CAMERA] robot0_eye_in_hand position: {wrist_pos}")
+                print(f"[DEBUG CAMERA] robot0_eye_in_hand quaternion: {wrist_quat}")
+            except:
+                pass
+        except Exception as e:
+            print(f"[DEBUG CAMERA] Could not get camera info: {e}")
+
     # Initialize action queue
     if cfg.num_open_loop_steps != NUM_ACTIONS_CHUNK:
         print(f"WARNING: cfg.num_open_loop_steps ({cfg.num_open_loop_steps}) does not match the NUM_ACTIONS_CHUNK "
                "{NUM_ACTIONS_CHUNK} constant defined in prismatic.vla.constants! For best performance (in terms of "
                "both speed and success rate), we recommend executing the full action chunk.")
     action_queue = deque(maxlen=cfg.num_open_loop_steps)
+
+    # Setup for debug image saving
+    debug_save_dir = None
+    if cfg.debug_save_input_images:
+        debug_save_dir = os.path.join("./rollouts/debug_images", DATE_TIME)
+        os.makedirs(debug_save_dir, exist_ok=True)
+        print(f"[DEBUG] Saving input images to: {debug_save_dir}")
 
     # Setup
     t = 0
@@ -328,6 +438,28 @@ def run_episode(
             # Prepare observation
             observation, img = prepare_observation(obs, resize_size)
             replay_images.append(img)
+            
+            # Debug: Save input images
+            if cfg.debug_save_input_images and (t - cfg.num_steps_wait) % cfg.debug_image_save_freq == 0:
+                from PIL import Image
+                step_idx = t - cfg.num_steps_wait
+                # Save agentview image (raw from env)
+                agentview_raw = obs["agentview_image"]
+                Image.fromarray(agentview_raw).save(
+                    os.path.join(debug_save_dir, f"ep{episode_idx}_step{step_idx}_agentview_raw.png")
+                )
+                # Save wrist image (raw from env)
+                wrist_raw = obs["robot0_eye_in_hand_image"]
+                Image.fromarray(wrist_raw).save(
+                    os.path.join(debug_save_dir, f"ep{episode_idx}_step{step_idx}_wrist_raw.png")
+                )
+                # Save processed images
+                Image.fromarray(observation["full_image"]).save(
+                    os.path.join(debug_save_dir, f"ep{episode_idx}_step{step_idx}_agentview_processed.png")
+                )
+                Image.fromarray(observation["wrist_image"]).save(
+                    os.path.join(debug_save_dir, f"ep{episode_idx}_step{step_idx}_wrist_processed.png")
+                )
 
             # If action queue is empty, requery model
             if len(action_queue) == 0:
@@ -433,6 +565,7 @@ def run_task(
             noisy_action_projector,
             initial_state,
             log_file,
+            episode_idx=task_episodes,
         )
 
         # Update counters
@@ -476,6 +609,11 @@ def run_task(
 
 
 
+def parse_offset_string(s: str) -> tuple:
+    """Parse comma-separated string to tuple of floats. E.g., '0.1,0.0,0.05' -> (0.1, 0.0, 0.05)"""
+    return tuple(float(x.strip()) for x in s.split(','))
+
+
 @draccus.wrap()
 def eval_libero(cfg: GenerateConfig) -> float:
     """Main function to evaluate a trained policy on LIBERO benchmark tasks."""
@@ -484,6 +622,27 @@ def eval_libero(cfg: GenerateConfig) -> float:
 
     # Set random seed
     set_seed_everywhere(cfg.seed)
+
+    # ========== Apply Environment Perturbation Settings ==========
+    # Parse string offsets to tuples (supports negative values like "-0.1,0.0,0.0")
+    agentview_pos = parse_offset_string(cfg.agentview_pos_offset)
+    agentview_rpy = parse_offset_string(cfg.agentview_rpy_offset)
+    wrist_pos = parse_offset_string(cfg.wrist_cam_pos_offset)
+    wrist_rpy = parse_offset_string(cfg.wrist_cam_rpy_offset)
+    
+    print(f"[DEBUG] Parsed agentview_pos_offset: {agentview_pos} (meters)")
+    print(f"[DEBUG] Parsed agentview_rpy_offset: {agentview_rpy} (degrees)")
+    print(f"[DEBUG] Parsed wrist_cam_pos_offset: {wrist_pos} (meters)")
+    print(f"[DEBUG] Parsed wrist_cam_rpy_offset: {wrist_rpy} (degrees)")
+    
+    set_env_perturbation(
+        agentview_pos_offset=agentview_pos,
+        agentview_rpy_offset=agentview_rpy,
+        wrist_cam_pos_offset=wrist_pos,
+        wrist_cam_rpy_offset=wrist_rpy,
+        table_height_offset=cfg.table_height_offset,
+    )
+    # ========== End Environment Perturbation ==========
 
     # Initialize model and components
     model, action_head, proprio_projector, noisy_action_projector, processor = initialize_model(cfg)

@@ -1,4 +1,14 @@
+data
+eval_logs
 experiments
+figure
+libero
+logs
+outputs
+pretrained_models
 prismatic
+rollouts
 scripts
+vggt
 vla-scripts
+wandb

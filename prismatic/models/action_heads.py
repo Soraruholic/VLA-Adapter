@@ -408,3 +408,5 @@ class MLPResNetBlock_Pro(nn.Module):
         # residual + FFN
         x = self.ffn(output + x)
         return x
+
+
