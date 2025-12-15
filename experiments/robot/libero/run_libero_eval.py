@@ -162,6 +162,9 @@ class GenerateConfig:
     use_pro_version: bool = True                     # encourage to use the pro models we released.
     phase: str = "Inference"
 
+    # ========== [ALOHA DELTA] Delta Action Configuration ==========
+    use_aloha_delta: bool = False                    # If True, convert delta actions to absolute for ALOHA tasks
+
 
 
 def validate_config(cfg: GenerateConfig) -> None:

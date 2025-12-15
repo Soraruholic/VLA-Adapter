@@ -256,6 +256,7 @@ def apply_trajectory_transforms(
     goal_relabeling_kwargs: dict = {},
     window_size: int = 1,
     future_action_window_size: int = 0,
+    pad_future_actions: bool = False,
     subsample_length: Optional[int] = None,
     skip_unlabeled: bool = False,
     max_action: Optional[float] = None,
@@ -335,6 +336,7 @@ def apply_trajectory_transforms(
             traj_transforms.chunk_act_obs,
             window_size=window_size,
             future_action_window_size=future_action_window_size,
+            pad_future_actions=pad_future_actions,
         ),
         num_parallel_calls,
     )

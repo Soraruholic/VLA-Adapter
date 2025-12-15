@@ -102,6 +102,7 @@ class FinetuneConfig:
     resume: bool = False                             # If True, resumes from checkpoint
     resume_step: Optional[int] = None                # (When `resume==True`) Step number that we are resuming from
     image_aug: bool = True                           # If True, trains with image augmentations (HIGHLY RECOMMENDED)
+    pad_future_actions: bool = False                 # If True, pads future actions with last action instead of dropping tail frames
     diffusion_sample_freq: int = 50                  # (When `use_diffusion==True`) Frequency for sampling in steps
 
     # LoRA
@@ -131,12 +132,23 @@ class FinetuneConfig:
     vggt_path: str = "/home/icrlab02/vla_ws/VLA-Adapter/pretrained_models/vggt/model.pt"  # Path to VGGT model for spatial alignment
     use_spatial_forcing: bool = False                # If True, enables VGGT spatial feature alignment
     align_loss_type: str = "cosine"                  # Loss function for alignment (cosine)
-    align_loss_coeff: float = 0.5                    # Coefficient for alignment loss
-    vla_layers_align: int = 18                       # Which layer of VLA hidden state to align (0-indexed)
-    vggt_layers_align: int = -1                      # Which layer of VGGT hidden state to align (0-indexed)
+    align_loss_coeff: float = 0.5                    # Coefficient for alignment loss (legacy, used when use_dual_align=False)
+    vla_layers_align: int = -1                       # Which layer of VLA hidden state to align (0-indexed)
+    vggt_layers_align: int = -1                      # Which layer of VGGT hidden state to align (0-indexed, legacy for use_dual_align=False)
     pooling_func: str = "bilinear"                   # Resize method for VGGT to VLA pixels (bilinear, nearest)
     use_vlm_norm: bool = False                       # Whether to use VLM normalization for vision embeddings
     use_vggt_pe: bool = True                         # Whether to use position embedding for VGGT
+    
+    # ========== [SPATIAL FORCING] Dual Alignment Configuration ==========
+    use_dual_align: bool = False                     # If True, uses separate Frame/Global alignment (new); False uses legacy concat alignment
+    share_frame_projector: bool = True               # If True, share frame projector across views; False uses per-view projectors
+    frame_align_layer: int = -1                      # VGGT layer for frame-level alignment (-1 = last layer)
+    global_align_layer: int = -1                     # VGGT layer for global-level alignment (-1 = last layer)
+    frame_loss_coeff: float = 0.5                    # Coefficient for frame-level alignment loss
+    global_loss_coeff: float = 0.5                   # Coefficient for global-level alignment loss
+
+    # ========== [ALOHA DELTA] Delta Action Configuration ==========
+    use_aloha_delta: bool = False                    # If True, convert absolute actions to delta for ALOHA datasets
 
 
 def remove_ddp_in_checkpoint(state_dict) -> dict:
@@ -310,6 +322,8 @@ def run_forward_pass(
     use_pro_version=True,
     vggt=None,
     align_projector=None,
+    frame_align_projector=None,
+    global_align_projector=None,
     preprocess_normed_images=None,
     custom_pooling=None,
     processor=None,
@@ -434,8 +448,15 @@ def run_forward_pass(
         
         # ========== [SPATIAL FORCING] Second Layer Selection: Alignment Loss ==========
         align_loss = torch.tensor(0.0, device=device_id)
+        frame_align_loss = torch.tensor(0.0, device=device_id)
+        global_align_loss = torch.tensor(0.0, device=device_id)
         
-        if cfg is not None and cfg.use_spatial_forcing and vggt is not None and align_projector is not None:
+        # Check if spatial forcing is enabled (supports both legacy and dual-align modes)
+        sf_enabled = cfg is not None and cfg.use_spatial_forcing and vggt is not None
+        sf_legacy_enabled = sf_enabled and not cfg.use_dual_align and align_projector is not None
+        sf_dual_enabled = sf_enabled and cfg.use_dual_align and frame_align_projector is not None and global_align_projector is not None
+        
+        if sf_legacy_enabled or sf_dual_enabled:
             # Extract single layer from VLA for alignment (different from the 24 layers used above)
             vla_hidden_for_align = output.hidden_states[cfg.vla_layers_align]  # [bs, seq_len, hidden_dim]
             
@@ -455,30 +476,79 @@ def run_forward_pass(
             with torch.autocast("cuda", dtype=torch.bfloat16), torch.no_grad():
                 vggt_output = vggt(unnorm_imgs)
             
-            # Extract specific layer from VGGT
-            agg_vggt_hidden = vggt_output["features"][cfg.vggt_layers_align]
             patch_start_idx = vggt_output["patch_start_idx"]
-            vggt_hidden = agg_vggt_hidden[:, :, patch_start_idx:, :]
-            
-            # Spatial resampling to match VLA's vision token layout
             original_img = vggt_output["images"]
             H, W = original_img.shape[-2:]
             patch_h, patch_w = H // vggt.patch_size, W // vggt.patch_size
-            vggt_hidden = custom_pooling(
-                vggt_hidden, 
-                (patch_h, patch_w), 
-                (H, W), 
-                vision_hidden,
-                cfg.pooling_func,
-                cfg.use_vggt_pe
-            )
             
-            # Compute alignment loss
-            align_loss = align_projector(vision_hidden, vggt_hidden)
+            if sf_dual_enabled:
+                # ========== [DUAL ALIGN] Separate Frame and Global Alignment ==========
+                # Extract frame features from specified layer (first 1024 dims)
+                frame_layer_features = vggt_output["features"][cfg.frame_align_layer]  # [B, N, P+special, 2048]
+                frame_hidden = frame_layer_features[:, :, patch_start_idx:, :1024]  # [B, N, P, 1024]
+                
+                # Extract global features from specified layer (last 1024 dims)
+                global_layer_features = vggt_output["features"][cfg.global_align_layer]  # [B, N, P+special, 2048]
+                global_hidden = global_layer_features[:, :, patch_start_idx:, 1024:]  # [B, N, P, 1024]
+                
+                # Spatial resampling for frame features
+                frame_hidden_pooled = custom_pooling(
+                    frame_hidden, 
+                    (patch_h, patch_w), 
+                    (H, W), 
+                    vision_hidden,
+                    cfg.pooling_func,
+                    cfg.use_vggt_pe
+                )  # [B, N*P_vla, 1024]
+                
+                # Spatial resampling for global features
+                global_hidden_pooled = custom_pooling(
+                    global_hidden, 
+                    (patch_h, patch_w), 
+                    (H, W), 
+                    vision_hidden,
+                    cfg.pooling_func,
+                    cfg.use_vggt_pe
+                )  # [B, N*P_vla, 1024]
+                
+                # Compute frame alignment loss
+                frame_align_loss = frame_align_projector(vision_hidden, frame_hidden_pooled)
+                
+                # Compute global alignment loss
+                global_align_loss = global_align_projector(vision_hidden, global_hidden_pooled)
+                
+                # Combined alignment loss
+                align_loss = cfg.frame_loss_coeff * frame_align_loss + cfg.global_loss_coeff * global_align_loss
+                
+            else:
+                # ========== [LEGACY] Concat Alignment ==========
+                agg_vggt_hidden = vggt_output["features"][cfg.vggt_layers_align]
+                vggt_hidden = agg_vggt_hidden[:, :, patch_start_idx:, :]  # [B, N, P, 2048]
+                
+                # Spatial resampling to match VLA's vision token layout
+                vggt_hidden = custom_pooling(
+                    vggt_hidden, 
+                    (patch_h, patch_w), 
+                    (H, W), 
+                    vision_hidden,
+                    cfg.pooling_func,
+                    cfg.use_vggt_pe
+                )
+                
+                # Compute alignment loss
+                align_loss = align_projector(vision_hidden, vggt_hidden)
         # ========== [END SPATIAL FORCING ALIGNMENT] ==========
         
-        loss = action_loss + (cfg.align_loss_coeff if (cfg and cfg.use_spatial_forcing) else 0.0) * align_loss
+        # Compute total loss
+        if cfg is not None and cfg.use_spatial_forcing:
+            if cfg.use_dual_align:
+                loss = action_loss + align_loss  # align_loss already weighted by frame/global coeffs
+            else:
+                loss = action_loss + cfg.align_loss_coeff * align_loss
+        else:
+            loss = action_loss
         
+        # Update metrics
         metrics.update(
             {
                 "loss_value": loss.item(),  # Detached value for logging
@@ -486,6 +556,15 @@ def run_forward_pass(
                 "align_loss": align_loss.item() if (cfg and cfg.use_spatial_forcing) else 0.0,  # ========== [SPATIAL FORCING] Add align_loss to metrics ==========
             }
         )
+        
+        # Add dual-align specific metrics
+        if cfg is not None and cfg.use_spatial_forcing and cfg.use_dual_align:
+            metrics.update(
+                {
+                    "frame_align_loss": frame_align_loss.item(),
+                    "global_align_loss": global_align_loss.item(),
+                }
+            )
 
         # Get detailed L1 losses for logging
         should_log_l1_loss = use_l1_regression
@@ -567,8 +646,9 @@ def save_training_checkpoint(
     train_dataset,
     distributed_state,
     new_state_dict,
-    align_projector=None
-    
+    align_projector=None,
+    frame_align_projector=None,
+    global_align_projector=None,
 ) -> None:
     """
     Save all training checkpoints including model components, LoRA adapter, and dataset statistics.
@@ -630,10 +710,21 @@ def save_training_checkpoint(
         if cfg.use_l1_regression and action_head is not None:
             torch.save(action_head.state_dict(), checkpoint_dir / f"action_head--{checkpoint_name_suffix}")
 
-        # ========== [SPATIAL FORCING] Save AlignProjector ==========
-        if cfg.use_spatial_forcing and align_projector is not None:
-            torch.save(get_module(align_projector).state_dict(), checkpoint_dir / f"align_projector--{checkpoint_name_suffix}")
-            print(f"[SPATIAL FORCING] Saved AlignProjector checkpoint")
+        # ========== [SPATIAL FORCING] Save AlignProjector(s) ==========
+        if cfg.use_spatial_forcing:
+            if cfg.use_dual_align:
+                # Dual-align mode: save frame and global projectors separately
+                if frame_align_projector is not None:
+                    torch.save(get_module(frame_align_projector).state_dict(), checkpoint_dir / f"frame_align_projector--{checkpoint_name_suffix}")
+                    print(f"[SPATIAL FORCING] Saved FrameAlignProjector checkpoint")
+                if global_align_projector is not None:
+                    torch.save(get_module(global_align_projector).state_dict(), checkpoint_dir / f"global_align_projector--{checkpoint_name_suffix}")
+                    print(f"[SPATIAL FORCING] Saved GlobalAlignProjector checkpoint")
+            else:
+                # Legacy mode: save single concat projector
+                if align_projector is not None:
+                    torch.save(get_module(align_projector).state_dict(), checkpoint_dir / f"align_projector--{checkpoint_name_suffix}")
+                    print(f"[SPATIAL FORCING] Saved AlignProjector checkpoint")
         # ========== [END SPATIAL FORCING CHECKPOINT] ==========
 
 
@@ -689,6 +780,8 @@ def run_validation(
     val_time_limit,
     vggt=None,
     align_projector=None,
+    frame_align_projector=None,
+    global_align_projector=None,
     preprocess_normed_images=None,
     custom_pooling=None,
     processor=None,
@@ -736,9 +829,11 @@ def run_validation(
                 num_patches=num_patches,
                 compute_diffusion_l1=True,
                 use_pro_version=cfg.use_pro_version,
-                cfg=cfg,  # 新增
+                cfg=cfg,
                 vggt=vggt,
                 align_projector=align_projector,
+                frame_align_projector=frame_align_projector,
+                global_align_projector=global_align_projector,
                 preprocess_normed_images=preprocess_normed_images,
                 custom_pooling=custom_pooling,
                 processor=processor,
@@ -915,6 +1010,8 @@ def finetune(cfg: FinetuneConfig) -> None:
     # ========== [SPATIAL FORCING] Initialize VGGT and AlignProjector ==========
     vggt = None
     align_projector = None
+    frame_align_projector = None
+    global_align_projector = None
     preprocess_normed_images = None
     custom_pooling = None
     
@@ -930,10 +1027,17 @@ def finetune(cfg: FinetuneConfig) -> None:
         try:
             if distributed_state.is_main_process:
                 print(f"[SPATIAL FORCING] Initializing Spatial Forcing components...")
-                print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, VGGT_layer={cfg.vggt_layers_align}, loss_coeff={cfg.align_loss_coeff}")
+                if cfg.use_dual_align:
+                    print(f"[SPATIAL FORCING] Mode: DUAL ALIGN (Frame + Global)")
+                    print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, Frame_layer={cfg.frame_align_layer}, Global_layer={cfg.global_align_layer}")
+                    print(f"[SPATIAL FORCING] Loss coeffs: frame={cfg.frame_loss_coeff}, global={cfg.global_loss_coeff}")
+                    print(f"[SPATIAL FORCING] Share frame projector: {cfg.share_frame_projector}")
+                else:
+                    print(f"[SPATIAL FORCING] Mode: LEGACY (concat alignment)")
+                    print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, VGGT_layer={cfg.vggt_layers_align}, loss_coeff={cfg.align_loss_coeff}")
             
             # Import from local spatial_forcing_components
-            from prismatic.models.projectors import AlignProjector
+            from prismatic.models.projectors import AlignProjector, FrameAlignProjector, GlobalAlignProjector
             from vggt.models.vggt import VGGT
             from vggt.utils.load_fn import preprocess_normed_images
             from prismatic.util.pooling_utils import custom_pooling
@@ -959,21 +1063,51 @@ def finetune(cfg: FinetuneConfig) -> None:
         if distributed_state.is_main_process:
             print(f"[SPATIAL FORCING] VGGT loaded from: {cfg.vggt_path}")
         
-        # Initialize AlignProjector
+        # Initialize AlignProjector(s)
         llm_hidden_size = get_module(vla).llm_dim
-        vggt_hidden_size = 1024  # VGGT feature dimension
+        vggt_hidden_size = 1024  # VGGT feature dimension (frame or global, each 1024)
         
-        align_projector = AlignProjector(
-            llm_dim=llm_hidden_size,
-            vggt_dim=vggt_hidden_size,
-            align_loss_type=cfg.align_loss_type
-        ).to(device_id)
-        
-        if distributed_state.num_processes > 1:
-            align_projector = DDP(align_projector, device_ids=[device_id])
+        if cfg.use_dual_align:
+            # ========== [DUAL ALIGN] Initialize Frame and Global Projectors ==========
+            frame_align_projector = FrameAlignProjector(
+                llm_dim=llm_hidden_size,
+                vggt_dim=vggt_hidden_size,
+                align_loss_type=cfg.align_loss_type,
+                use_vlm_norm=cfg.use_vlm_norm,
+                num_views=cfg.num_images_in_input,
+                share_projector=cfg.share_frame_projector,
+            ).to(device_id)
+            
+            global_align_projector = GlobalAlignProjector(
+                llm_dim=llm_hidden_size,
+                vggt_dim=vggt_hidden_size,
+                align_loss_type=cfg.align_loss_type,
+                use_vlm_norm=cfg.use_vlm_norm,
+            ).to(device_id)
+            
+            if distributed_state.num_processes > 1:
+                frame_align_projector = DDP(frame_align_projector, device_ids=[device_id])
+                global_align_projector = DDP(global_align_projector, device_ids=[device_id])
+            
+            if distributed_state.is_main_process:
+                print(f"[SPATIAL FORCING] FrameAlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
+                print(f"[SPATIAL FORCING] GlobalAlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
+        else:
+            # ========== [LEGACY] Initialize single concat AlignProjector ==========
+            align_projector = AlignProjector(
+                llm_dim=llm_hidden_size,
+                vggt_dim=vggt_hidden_size,
+                align_loss_type=cfg.align_loss_type,
+                use_vlm_norm=cfg.use_vlm_norm,
+            ).to(device_id)
+            
+            if distributed_state.num_processes > 1:
+                align_projector = DDP(align_projector, device_ids=[device_id])
+            
+            if distributed_state.is_main_process:
+                print(f"[SPATIAL FORCING] AlignProjector (legacy) initialized: {llm_hidden_size} -> {2 * vggt_hidden_size}")
         
         if distributed_state.is_main_process:
-            print(f"[SPATIAL FORCING] AlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
             print(f"[SPATIAL FORCING] Alignment loss type: {cfg.align_loss_type}")
     # ========== [END SPATIAL FORCING] ==========
 
@@ -1056,8 +1190,17 @@ def finetune(cfg: FinetuneConfig) -> None:
         trainable_params += [param for param in proprio_projector.parameters() if param.requires_grad]
     
     # ========== [SPATIAL FORCING] Add AlignProjector parameters to optimizer ==========
-    if cfg.use_spatial_forcing and align_projector is not None:
-        trainable_params += [param for param in align_projector.parameters() if param.requires_grad]
+    if cfg.use_spatial_forcing:
+        if cfg.use_dual_align:
+            # Dual-align mode: add both frame and global projectors
+            if frame_align_projector is not None:
+                trainable_params += [param for param in frame_align_projector.parameters() if param.requires_grad]
+            if global_align_projector is not None:
+                trainable_params += [param for param in global_align_projector.parameters() if param.requires_grad]
+        else:
+            # Legacy mode: add single concat projector
+            if align_projector is not None:
+                trainable_params += [param for param in align_projector.parameters() if param.requires_grad]
     # ========== [END SPATIAL FORCING] ==========
     
     print(f"# total trainable params: {sum(p.numel() for p in trainable_params)}")
@@ -1110,7 +1253,8 @@ def finetune(cfg: FinetuneConfig) -> None:
         prompt_builder_fn=PurePromptBuilder,
         use_wrist_image=use_wrist_image,
         use_proprio=cfg.use_proprio,
-        use_minivlm=cfg.use_minivlm
+        use_minivlm=cfg.use_minivlm,
+        use_aloha_delta=cfg.use_aloha_delta,
         )
     train_dataset = RLDSDataset(
         cfg.data_root_dir,
@@ -1119,6 +1263,7 @@ def finetune(cfg: FinetuneConfig) -> None:
         resize_resolution=tuple(vla.module.config.image_sizes),
         shuffle_buffer_size=cfg.shuffle_buffer_size,
         image_aug=cfg.image_aug,
+        pad_future_actions=cfg.pad_future_actions,
     )
     if cfg.use_val_set:
         val_dataset = RLDSDataset(
@@ -1128,6 +1273,7 @@ def finetune(cfg: FinetuneConfig) -> None:
             resize_resolution=tuple(vla.module.config.image_sizes),
             shuffle_buffer_size=cfg.shuffle_buffer_size // 10,
             image_aug=cfg.image_aug,
+            pad_future_actions=cfg.pad_future_actions,
             train=False,
         )
 
@@ -1188,7 +1334,9 @@ def finetune(cfg: FinetuneConfig) -> None:
                 use_pro_version=cfg.use_pro_version,
                 cfg=cfg,
                 vggt=vggt if cfg.use_spatial_forcing else None,
-                align_projector=align_projector if cfg.use_spatial_forcing else None,
+                align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                 preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
                 custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
                 processor=processor,
@@ -1254,7 +1402,9 @@ def finetune(cfg: FinetuneConfig) -> None:
                     train_dataset=train_dataset,
                     distributed_state=distributed_state,
                     new_state_dict=RAW_STATE_DICT,
-                    align_projector=align_projector if cfg.use_spatial_forcing else None,
+                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                    frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                    global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                 )
 
             # Test model on validation set
@@ -1273,7 +1423,9 @@ def finetune(cfg: FinetuneConfig) -> None:
                     distributed_state=distributed_state,
                     val_time_limit=cfg.val_time_limit,
                     vggt=vggt if cfg.use_spatial_forcing else None,
-                    align_projector=align_projector if cfg.use_spatial_forcing else None,
+                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                    frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                    global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                     preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
                     custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
                     processor=processor,

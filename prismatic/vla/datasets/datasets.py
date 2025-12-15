@@ -26,6 +26,11 @@ from prismatic.vla.datasets.rlds.oxe import OXE_NAMED_MIXTURES, get_oxe_dataset_
 
 
 
+# ALOHA Delta Action Mask: Joint positions are delta, gripper stays absolute
+# Format: [Joint(6) + Gripper(1)] × 2 arms = 14 dimensions
+ALOHA_DELTA_MASK = np.array([True]*6 + [False] + [True]*6 + [False], dtype=bool)
+
+
 @dataclass
 class RLDSBatchTransform:
     action_tokenizer: ActionTokenizer
@@ -36,6 +41,7 @@ class RLDSBatchTransform:
     use_wrist_image: bool = False
     use_proprio: bool = False
     use_minivlm: bool = False
+    use_aloha_delta: bool = False  # If True, convert absolute actions to delta for ALOHA datasets
 
 
     def __call__(self, rlds_batch: Dict[str, Any]) -> Dict[str, Any]:
@@ -43,13 +49,31 @@ class RLDSBatchTransform:
         dataset_name, current_action = rlds_batch["dataset_name"], rlds_batch["action"][0]
         img = Image.fromarray(rlds_batch["observation"]["image_primary"][0])
         lang = rlds_batch["task"]["language_instruction"].decode().lower()
-        actions = rlds_batch["action"]
+        actions = rlds_batch["action"].copy()  # Copy to avoid modifying original
+
+        # ========== [ALOHA DELTA] Convert absolute actions to delta ==========
+        # Only applies to ALOHA datasets when use_aloha_delta is enabled
+        if self.use_aloha_delta and "aloha" in dataset_name.lower():
+            # Get current state (proprio) as reference for delta computation
+            # State shape: [window_size, proprio_dim], we use the first (current) state
+            if "proprio" in rlds_batch["observation"]:
+                state = rlds_batch["observation"]["proprio"][0]  # Current state
+                dims = min(len(ALOHA_DELTA_MASK), actions.shape[-1], len(state))
+                # Convert to delta: action = action - state (for masked dimensions)
+                # actions shape: [chunk_size, action_dim]
+                actions[..., :dims] = actions[..., :dims] - np.where(
+                    ALOHA_DELTA_MASK[:dims], 
+                    state[:dims], 
+                    0
+                )
+                current_action = actions[0]
+        # ========== [END ALOHA DELTA] ==========
 
         # Construct Chat-based Prompt =>> Input is default query + language instruction, output are the action tokens
         prompt_builder = self.prompt_builder_fn("openvla")
 
-        # Get future action chunk
-        future_actions = rlds_batch["action"][1:]
+        # Get future action chunk (use delta-converted actions if applicable)
+        future_actions = actions[1:]
 
         if self.use_minivlm:
             self.prompt_builder_fn = QwenPromptBuilder
@@ -154,6 +178,7 @@ class RLDSDataset(IterableDataset):
         shuffle_buffer_size: int = 256_000,
         train: bool = True,
         image_aug: bool = False,
+        pad_future_actions: bool = False,
     ) -> None:
         """Lightweight wrapper around RLDS TFDS Pipeline for use with PyTorch/OpenVLA Data Loaders."""
         self.data_root_dir, self.data_mix, self.batch_transform = data_root_dir, data_mix, batch_transform
@@ -184,6 +209,7 @@ class RLDSDataset(IterableDataset):
             traj_transform_kwargs=dict(
                 window_size=1,                                      # If we wanted to feed / predict more than one step
                 future_action_window_size=NUM_ACTIONS_CHUNK-1,      # For action chunking
+                pad_future_actions=pad_future_actions,              # Whether to pad future actions instead of dropping
                 skip_unlabeled=True,                                # Skip trajectories without language labels
                 goal_relabeling_strategy="uniform",                 # Goals are currently unused
             ),

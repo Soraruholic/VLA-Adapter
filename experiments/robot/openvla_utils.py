@@ -33,6 +33,10 @@ from prismatic.vla.constants import (
 )
 from prismatic.vla.datasets.rlds.utils.data_utils import NormalizationType
 
+# ALOHA Delta Action Mask: Joint positions are delta, gripper stays absolute
+# Format: [Joint(6) + Gripper(1)] × 2 arms = 14 dimensions
+ALOHA_DELTA_MASK = np.array([True]*6 + [False] + [True]*6 + [False], dtype=bool)
+
 # Initialize important constants
 DATE = time.strftime("%Y_%m_%d")
 DATE_TIME = time.strftime("%Y_%m_%d-%H_%M_%S")
@@ -763,6 +767,13 @@ def get_vla_action(
     Returns:
         List[np.ndarray]: Predicted actions
     """
+    # ========== [ALOHA DELTA] Save original state for delta->absolute conversion ==========
+    original_state = None
+    use_aloha_delta = getattr(cfg, 'use_aloha_delta', False)
+    if use_aloha_delta and cfg.use_proprio:
+        original_state = obs["state"].copy()  # Save before normalization
+    # ========== [END ALOHA DELTA] ==========
+
     with torch.inference_mode():
 
         # Collect all input images
@@ -820,6 +831,19 @@ def get_vla_action(
                 action_head=action_head,
                 use_film=use_film,
             )
+
+    # ========== [ALOHA DELTA] Convert delta actions to absolute ==========
+    # Only applies when use_aloha_delta is enabled and we have the original state
+    if use_aloha_delta and original_state is not None:
+        # action shape: [chunk_size, action_dim]
+        # Convert delta to absolute: action = action + state (for masked dimensions)
+        dims = min(len(ALOHA_DELTA_MASK), action.shape[-1], len(original_state))
+        action[..., :dims] = action[..., :dims] + np.where(
+            ALOHA_DELTA_MASK[:dims],
+            original_state[:dims],
+            0
+        )
+    # ========== [END ALOHA DELTA] ==========
 
     # Extract subset of actions for open loop steps
     return [action[i] for i in range(min(len(action), cfg.num_open_loop_steps))]

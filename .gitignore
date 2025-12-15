@@ -153,7 +153,7 @@ rollouts/
 wandb/
 outputs/
 pretrained_models/
-libero/
-experiments/logs/
+# libero/
+# experiments/logs/
 eval_logs/
 logs/

@@ -1,7 +1,7 @@
 # data_name=libero_spatial_no_noops
-data_name=aloha_beat_block_hammer
+data_name=aloha_handover_block
 
-CUDA_VISIBLE_DEVICES=0 MASTER_PORT=29501 torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
+CUDA_VISIBLE_DEVICES=0 MASTER_PORT=29504 torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
 --vlm_path pretrained_models/prism-qwen25-extra-dinosiglip-224px-0_5b \
 --config_file_path pretrained_models/configs \
 --data_root_dir data/aloha \
@@ -23,8 +23,9 @@ CUDA_VISIBLE_DEVICES=0 MASTER_PORT=29501 torchrun --standalone --nnodes 1 --npro
 --grad_accumulation_steps 2 \
 --learning_rate 2e-4 \
 --lora_rank 64 \
+--pad_future_actions False \
 --use_pro_version True \
 --wandb_entity "vla_adapter_base" \
 --wandb_project "$data_name" \
---run_id_note VLA-Adapter--aloha_beat_block_hammer--$current_time \
-> logs/VLA-Adapter--aloha_beat_block_hammer--$current_time.log 2>&1 & 
+--run_id_note VLA-Adapter--aloha_handover_block--$current_time \
+> logs/VLA-Adapter--aloha_handover_block--$current_time.log 2>&1 & 

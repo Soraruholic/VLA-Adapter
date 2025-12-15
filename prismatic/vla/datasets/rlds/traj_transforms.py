@@ -11,7 +11,7 @@ from typing import Dict
 import tensorflow as tf
 
 
-def chunk_act_obs(traj: Dict, window_size: int, future_action_window_size: int = 0) -> Dict:
+def chunk_act_obs(traj: Dict, window_size: int, future_action_window_size: int = 0, pad_future_actions: bool = False) -> Dict:
     """
     Chunks actions and observations into the given window_size.
 
@@ -21,10 +21,26 @@ def chunk_act_obs(traj: Dict, window_size: int, future_action_window_size: int =
     action, and `future_action_window_size` actions from the future. "pad_mask" is added to "observation" and
     indicates whether an observation should be considered padding (i.e. if it had come from a timestep
     before the start of the trajectory).
+
+    Args:
+        traj: Trajectory dictionary containing actions, observations, etc.
+        window_size: Number of past observations/actions to include.
+        future_action_window_size: Number of future actions to include.
+        pad_future_actions: If True, keep all frames and pad future actions with the last action
+            when there aren't enough future actions. If False (default), drop the last
+            `future_action_window_size` frames to ensure complete action chunks.
     """
     traj_len = tf.shape(traj["action"])[0]
     action_dim = traj["action"].shape[-1]
-    effective_traj_len = traj_len - future_action_window_size
+    
+    # Determine effective trajectory length based on padding strategy
+    if pad_future_actions:
+        # Keep all frames, pad future actions with the last action
+        effective_traj_len = traj_len
+    else:
+        # Drop last `future_action_window_size` frames (original behavior)
+        effective_traj_len = traj_len - future_action_window_size
+    
     chunk_indices = tf.broadcast_to(tf.range(-window_size + 1, 1), [effective_traj_len, window_size]) + tf.broadcast_to(
         tf.range(effective_traj_len)[:, None], [effective_traj_len, window_size]
     )
@@ -41,6 +57,7 @@ def chunk_act_obs(traj: Dict, window_size: int, future_action_window_size: int =
 
     goal_timestep = tf.fill([effective_traj_len], traj_len - 1)
 
+    # Clip action indices to valid range [0, traj_len-1], padding with last action
     floored_action_chunk_indices = tf.minimum(tf.maximum(action_chunk_indices, 0), goal_timestep[:, None])
 
     traj["observation"] = tf.nest.map_structure(lambda x: tf.gather(x, floored_chunk_indices), traj["observation"])
@@ -48,6 +65,15 @@ def chunk_act_obs(traj: Dict, window_size: int, future_action_window_size: int =
 
     # indicates whether an entire observation is padding
     traj["observation"]["pad_mask"] = chunk_indices >= 0
+    
+    # Add action padding mask to indicate which actions are padded (only when pad_future_actions=True)
+    if pad_future_actions:
+        # action_chunk_indices shape: [effective_traj_len, window_size + future_action_window_size]
+        # Mark as padding if index >= traj_len (i.e., would have been clipped)
+        traj["action_pad_mask"] = action_chunk_indices < traj_len
+    else:
+        # All actions are valid when not padding
+        traj["action_pad_mask"] = tf.ones_like(action_chunk_indices, dtype=tf.bool)
 
     # Truncate other elements of the trajectory dict
     traj["task"] = tf.nest.map_structure(lambda x: tf.gather(x, tf.range(effective_traj_len)), traj["task"])
