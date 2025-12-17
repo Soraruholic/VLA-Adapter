@@ -138,10 +138,10 @@ class FinetuneConfig:
     pooling_func: str = "bilinear"                   # Resize method for VGGT to VLA pixels (bilinear, nearest)
     use_vlm_norm: bool = False                       # Whether to use VLM normalization for vision embeddings
     use_vggt_pe: bool = True                         # Whether to use position embedding for VGGT
+    share_projector: bool = True                     # If True, share projector across views; False uses per-view projectors (applies to both modes)
     
     # ========== [SPATIAL FORCING] Dual Alignment Configuration ==========
     use_dual_align: bool = False                     # If True, uses separate Frame/Global alignment (new); False uses legacy concat alignment
-    share_frame_projector: bool = True               # If True, share frame projector across views; False uses per-view projectors
     frame_align_layer: int = -1                      # VGGT layer for frame-level alignment (-1 = last layer)
     global_align_layer: int = -1                     # VGGT layer for global-level alignment (-1 = last layer)
     frame_loss_coeff: float = 0.5                    # Coefficient for frame-level alignment loss
@@ -533,7 +533,18 @@ def run_forward_pass(
                     vision_hidden,
                     cfg.pooling_func,
                     cfg.use_vggt_pe
-                )
+                )  # [B, N*P_vla, 2048]
+                
+                # Reshape for per-view projector if share_projector=False
+                if not cfg.share_projector:
+                    B = vision_hidden.shape[0]
+                    N = cfg.num_images_in_input
+                    P = vision_hidden.shape[1] // N
+                    D_llm = vision_hidden.shape[2]
+                    D_vggt = vggt_hidden.shape[2]
+                    # Reshape to [B, N, P, D] for per-view processing
+                    vision_hidden = vision_hidden.reshape(B, N, P, D_llm)
+                    vggt_hidden = vggt_hidden.reshape(B, N, P, D_vggt)
                 
                 # Compute alignment loss
                 align_loss = align_projector(vision_hidden, vggt_hidden)
@@ -1075,7 +1086,7 @@ def finetune(cfg: FinetuneConfig) -> None:
                 align_loss_type=cfg.align_loss_type,
                 use_vlm_norm=cfg.use_vlm_norm,
                 num_views=cfg.num_images_in_input,
-                share_projector=cfg.share_frame_projector,
+                share_projector=cfg.share_projector,
             ).to(device_id)
             
             global_align_projector = GlobalAlignProjector(
@@ -1090,7 +1101,7 @@ def finetune(cfg: FinetuneConfig) -> None:
                 global_align_projector = DDP(global_align_projector, device_ids=[device_id])
             
             if distributed_state.is_main_process:
-                print(f"[SPATIAL FORCING] FrameAlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
+                print(f"[SPATIAL FORCING] FrameAlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}, share_projector={cfg.share_projector}")
                 print(f"[SPATIAL FORCING] GlobalAlignProjector initialized: {llm_hidden_size} -> {vggt_hidden_size}")
         else:
             # ========== [LEGACY] Initialize single concat AlignProjector ==========
@@ -1099,13 +1110,15 @@ def finetune(cfg: FinetuneConfig) -> None:
                 vggt_dim=vggt_hidden_size,
                 align_loss_type=cfg.align_loss_type,
                 use_vlm_norm=cfg.use_vlm_norm,
+                num_views=cfg.num_images_in_input,
+                share_projector=cfg.share_projector,
             ).to(device_id)
             
             if distributed_state.num_processes > 1:
                 align_projector = DDP(align_projector, device_ids=[device_id])
             
             if distributed_state.is_main_process:
-                print(f"[SPATIAL FORCING] AlignProjector (legacy) initialized: {llm_hidden_size} -> {2 * vggt_hidden_size}")
+                print(f"[SPATIAL FORCING] AlignProjector initialized: {llm_hidden_size} -> {2 * vggt_hidden_size}, share_projector={cfg.share_projector}")
         
         if distributed_state.is_main_process:
             print(f"[SPATIAL FORCING] Alignment loss type: {cfg.align_loss_type}")

@@ -31,28 +31,41 @@ VGGT Output (2048D) = Frame Features (1024D) || Global Features (1024D)
 
 ## 实现细节
 
-### 1. 新增配置参数
+### 1. 配置参数
 
 **文件**: `vla-scripts/finetune.py`
 
 ```python
+# ========== [SPATIAL FORCING] Configuration Parameters ==========
+share_projector: bool = True                     # 不同视角是否共享 projector（适用于两种模式）
+
 # ========== [SPATIAL FORCING] Dual Alignment Configuration ==========
 use_dual_align: bool = False                     # 是否启用双路对齐模式
-share_frame_projector: bool = True               # 不同视角是否共享 Frame projector
 frame_align_layer: int = -1                      # Frame 对齐使用的 VGGT 层索引
 global_align_layer: int = -1                     # Global 对齐使用的 VGGT 层索引
 frame_loss_coeff: float = 0.5                    # Frame 对齐损失系数
 global_loss_coeff: float = 0.5                   # Global 对齐损失系数
 ```
 
+#### 通用参数（适用于两种模式）
+
+| 参数 | 类型 | 默认值 | 说明 |
+|-----|------|-------|------|
+| `share_projector` | bool | True | True：所有视角共享同一个 projector；False：每个视角独立 projector |
+
+#### Dual Align 专用参数
+
 | 参数 | 类型 | 默认值 | 说明 |
 |-----|------|-------|------|
 | `use_dual_align` | bool | False | 启用双路对齐模式（新）；False 使用原有 concat 对齐（legacy） |
-| `share_frame_projector` | bool | True | True：所有视角共享同一个 Frame projector；False：每个视角独立 projector |
 | `frame_align_layer` | int | -1 | VGGT 的哪一层用于 Frame 特征提取（-1 表示最后一层） |
 | `global_align_layer` | int | -1 | VGGT 的哪一层用于 Global 特征提取（-1 表示最后一层） |
 | `frame_loss_coeff` | float | 0.5 | Frame 对齐损失的权重系数 |
 | `global_loss_coeff` | float | 0.5 | Global 对齐损失的权重系数 |
+
+> **注意**: `share_projector` 参数现在适用于两种模式：
+> - **Legacy SF 模式** (`use_dual_align=False`): 控制 `AlignProjector` 是否为每个视角使用独立的 projector
+> - **Dual Align 模式** (`use_dual_align=True`): 控制 `FrameAlignProjector` 是否为每个视角使用独立的 projector（`GlobalAlignProjector` 始终共享）
 
 ---
 
@@ -111,7 +124,7 @@ if cfg.use_dual_align:
         align_loss_type=cfg.align_loss_type,
         use_vlm_norm=cfg.use_vlm_norm,
         num_views=cfg.num_images_in_input,
-        share_projector=cfg.share_frame_projector,
+        share_projector=cfg.share_projector,
     ).to(device_id)
     
     global_align_projector = GlobalAlignProjector(
@@ -121,8 +134,15 @@ if cfg.use_dual_align:
         use_vlm_norm=cfg.use_vlm_norm,
     ).to(device_id)
 else:
-    # Legacy 模式（原有逻辑）
-    align_projector = AlignProjector(...)
+    # Legacy 模式（现在也支持 per-view projector）
+    align_projector = AlignProjector(
+        llm_dim=llm_hidden_size,
+        vggt_dim=vggt_hidden_size,
+        align_loss_type=cfg.align_loss_type,
+        use_vlm_norm=cfg.use_vlm_norm,
+        num_views=cfg.num_images_in_input,
+        share_projector=cfg.share_projector,
+    ).to(device_id)
 ```
 
 ---
