@@ -49,15 +49,15 @@ CUDA_VISIBLE_DEVICES=0 python experiments/robot/libero/run_libero_eval.py \
   --use_proprio True \
   --num_images_in_input 2 \
   --use_film False \
-  --pretrained_checkpoint /mnt/nas/weights/vla-adapter-sf/outputs/configs+libero_spatial_no_noops+b24+lr-0.0002+lora-r64+dropout-0.0--image_aug--VLA-Adapter--libero_spatial_no_noops----10000_chkpt \
+  --pretrained_checkpoint /mnt/nas/weights/vla-adapter-sf/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--VLA-Adapter-SF--libero_spatial_no_noops----15000_chkpt \
   --task_suite_name libero_spatial \
   --use_pro_version True \
-  --agentview_pos_offset="0.1,0.0,0.0" \
-  --agentview_rpy_offset="0.0,0.0,0.0" \
+  --agentview_pos_offset="0.0,0.0,0.0" \
+  --agentview_rpy_offset="0.0,5.0,0.0" \
   --wrist_cam_pos_offset="0.0,0.0,0.0" \
-  --wrist_cam_rpy_offset="0.0,0.0,20.0" \
-  --table_height_offset 0.0 \
-  > eval_logs/Spatial-10k-perturb_env_x0_1-chkpt.log 2>&1 &
+  --wrist_cam_rpy_offset="0.0,0.0,0.0" \
+  --table_height_offset="0.0" \
+  > eval_logs/Spatial-SF-15k-perturb_env_roll5.log 2>&1 &
 
 
 

@@ -31,13 +31,9 @@ CUDA_VISIBLE_DEVICES=0 torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-s
 --wandb_entity "vla_adapter_sf" \
 --wandb_project "$data_name" \
 --use_spatial_forcing True \
---use_dual_align True \
---share_frame_projector True \
---frame_align_layer -1 \
---global_align_layer -1 \
---frame_loss_coeff 0.5 \
---global_loss_coeff 0.5 \
---run_id_note VLA-Adapter-SF-DUAL--libero_spatial_no_noops--$current_time \
-> logs/VLA-Adapter-SF-DUAL--libero_spatial_no_noops--$current_time.log 2>&1 &
+--use_dual_align False \
+--share_projector False \
+--run_id_note VLA-Adapter-SF-NO-SHARE--libero_spatial_no_noops--$current_time \
+> logs/VLA-Adapter-SF-NO-SHARE--libero_spatial_no_noops--$current_time.log 2>&1 &
 
-echo "Training started with DUAL ALIGN mode. Check logs/VLA-Adapter-SF-DUAL--libero_spatial_no_noops--$current_time.log for progress."
+echo "Training started with NO SHARE mode. Check logs/VLA-Adapter-SF-NO-SHARE--libero_spatial_no_noops--$current_time.log for progress."

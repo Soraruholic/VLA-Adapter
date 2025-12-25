@@ -191,7 +191,8 @@ class RLDSDataset(IterableDataset):
             mixture_spec = [(self.data_mix, 1.0)]
 
         # fmt: off
-        if "aloha" in self.data_mix:
+        # Bimanual robots (ALOHA, RoboTwin) use left_wrist/right_wrist; single-arm robots use wrist
+        if "aloha" in self.data_mix.lower() or "robotwin" in self.data_mix.lower():
             load_camera_views = ("primary", "left_wrist", "right_wrist")
         else:
             load_camera_views = ("primary", "wrist")
