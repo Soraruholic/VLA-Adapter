@@ -53,11 +53,11 @@ CUDA_VISIBLE_DEVICES=0 python experiments/robot/libero/run_libero_eval.py \
   --task_suite_name libero_spatial \
   --use_pro_version True \
   --agentview_pos_offset="0.0,0.0,0.0" \
-  --agentview_rpy_offset="0.0,5.0,0.0" \
+  --agentview_rpy_offset="0.0,0.0,.0" \
   --wrist_cam_pos_offset="0.0,0.0,0.0" \
   --wrist_cam_rpy_offset="0.0,0.0,0.0" \
-  --table_height_offset="0.0" \
-  > eval_logs/Spatial-SF-15k-perturb_env_roll5.log 2>&1 &
+  --table_height_offset="0.15" \
+  > eval_logs/Spatial-SF-15k-perturb_env_table15.log 2>&1 &
 
 
 

@@ -39,6 +39,7 @@ from experiments.robot.openvla_utils import (
     get_proprio_projector,
     resize_image_for_policy,
 )
+from experiments.robot.grad_cam_utils import setup_grad_cam_visualizer, create_cam_config
 from experiments.robot.robot_utils import (
     DATE_TIME,
     get_action,
@@ -161,6 +162,14 @@ class GenerateConfig:
     save_version: str = "vla-adapter"                # version of 
     use_pro_version: bool = True                     # encourage to use the pro models we released.
     phase: str = "Inference"
+
+    # ========== [CAM VISUALIZATION] Configuration ==========
+    enable_cam: bool = False                         # Enable CAM visualization during eval
+    cam_mode: str = "activation"                     # "activation" (fast) or "grad_cam" (accurate)
+    cam_output_dir: str = "./grad_cam_outputs"       # Output directory for CAM visualizations
+    cam_every_n_steps: int = 10                      # Generate CAM every N steps (1=every step)
+    cam_action_dims: str = ""                        # Comma-separated action dims to visualize (empty=default)
+
 
     # ========== [ALOHA DELTA] Delta Action Configuration ==========
     use_aloha_delta: bool = False                    # If True, convert delta actions to absolute for ALOHA tasks
@@ -370,6 +379,7 @@ def run_episode(
     initial_state=None,
     log_file=None,
     episode_idx=0,
+    cam_visualizer=None,
 ):
     """Run a single episode in the environment."""
     from experiments.robot.libero.libero_utils import _apply_camera_perturbation_to_env
@@ -482,6 +492,23 @@ def run_episode(
 
                 action_queue.extend(actions) 
 
+                # ========== [CAM VISUALIZATION] Generate CAM ==========
+                if cam_visualizer is not None:
+                    step_idx = t - cfg.num_steps_wait
+                    original_images = [observation["full_image"]]
+                    if "wrist_image" in observation:
+                        original_images.append(observation["wrist_image"])
+                    cam_visualizer.generate_cam(
+                        inputs=None,  # Will be computed internally
+                        original_images=original_images,
+                        proprio=observation.get("state"),
+                        unnorm_key=cfg.unnorm_key,
+                        step_idx=step_idx,
+                        episode_idx=episode_idx,
+                        task_label=task_description,
+                    )
+                # ========== [END CAM VISUALIZATION] ==========
+
             # Get action from queue
             action = action_queue.popleft()
             # action = actions[0]
@@ -518,7 +545,8 @@ def run_task(
     total_episodes=0,
     total_successes=0,
     log_file=None,
-    save_version=None
+    save_version=None,
+    cam_visualizer=None,
 ):
     """Run evaluation for a single task."""
     # Get task
@@ -569,6 +597,7 @@ def run_task(
             initial_state,
             log_file,
             episode_idx=task_episodes,
+            cam_visualizer=cam_visualizer,
         )
 
         # Update counters
@@ -650,6 +679,31 @@ def eval_libero(cfg: GenerateConfig) -> float:
     # Initialize model and components
     model, action_head, proprio_projector, noisy_action_projector, processor = initialize_model(cfg)
 
+    # ========== [CAM VISUALIZATION] Setup ==========
+    cam_visualizer = None
+    if cfg.enable_cam:
+        action_dims = None
+        if cfg.cam_action_dims:
+            action_dims = [int(d.strip()) for d in cfg.cam_action_dims.split(",") if d.strip()]
+        cam_config = create_cam_config(
+            enabled=True,
+            mode=cfg.cam_mode,
+            dataset_type="libero",
+            output_dir=cfg.cam_output_dir,
+            visualize_every_n_steps=cfg.cam_every_n_steps,
+            num_views=cfg.num_images_in_input,
+            action_dims_to_visualize=action_dims,
+        )
+        cam_visualizer = setup_grad_cam_visualizer(
+            vla_model=model,
+            processor=processor,
+            config=cam_config,
+            action_head=action_head,
+            proprio_projector=proprio_projector,
+        )
+        print(f"[CAM] Enabled CAM visualization: mode={cfg.cam_mode}, every {cfg.cam_every_n_steps} steps")
+    # ========== [END CAM VISUALIZATION] ==========
+
     # for name, param in model.named_parameters():
     #     if 'action_queries' in name: 
     #         print(f"{name}: {param}")
@@ -683,7 +737,8 @@ def eval_libero(cfg: GenerateConfig) -> float:
             total_episodes,
             total_successes,
             log_file,
-            cfg.save_version
+            cfg.save_version,
+            cam_visualizer,
         )
 
     # Calculate final success rate
