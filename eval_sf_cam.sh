@@ -1,68 +1,73 @@
 #!/bin/bash
-# Evaluation script with CAM (Class Activation Mapping) visualization
-# This script demonstrates how to use CAM visualization during evaluation
-
-export PYTHONPATH="/home/icrlab02/vla_ws/LIBERO:$PYTHONPATH"
-
-# ========== CAM Visualization Configuration ==========
+# =============================================================================
+# Evaluation Script with CAM Visualization (using pytorch-grad-cam library)
+# =============================================================================
 #
-# --enable_cam True/False     : Enable/disable CAM visualization
-# --cam_mode "activation"     : Fast mode using activation magnitude (EigenCAM-like)
-#            "grad_cam"       : True Grad-CAM with gradient computation (slower but per-action-dim)
-# --cam_output_dir "./path"   : Output directory for CAM images
-# --cam_every_n_steps N       : Generate CAM every N steps (1=every step, 10=every 10 steps)
-# --cam_action_dims "0,1,2,6" : Comma-separated action dims to visualize (empty=default)
-#                               LIBERO default: 0,1,2 (xyz position), 6 (gripper)
+# This script runs VLA-Adapter evaluation with CAM visualization enabled.
+# CAM methods available (using pytorch-grad-cam library):
+#   - eigencam    : Fast, no gradients needed, uses PCA on activations
+#   - gradcam     : Classic Grad-CAM, requires gradients
+#   - hirescam    : High-resolution CAM, element-wise activation*gradient
+#   - gradcam++   : Improved Grad-CAM with second-order gradients
+#   - xgradcam    : Gradient weighted by normalized activations
+#   - layercam    : Spatially weighted by positive gradients
+#   - eigengradcam: EigenCAM with class discrimination via gradients
 #
-# Output files:
-#   grad_cam_outputs/ep0000_s0010_siglip_b26_v0_act.png  - SigLIP layer, view 0
-#   grad_cam_outputs/ep0000_s0010_qwen_l12_v1_d0.png     - Qwen layer 12, view 1, action dim 0
-#   grad_cam_outputs/ep0000_s0010_grid.png              - Summary grid
+# Usage:
+#   bash eval_sf_cam.sh
 #
+# =============================================================================
 
-# ========== Example 1: Fast Activation-based CAM (every 10 steps) ==========
-# CUDA_VISIBLE_DEVICES=0 python experiments/robot/libero/run_libero_eval.py \
-#   --use_proprio True \
-#   --num_images_in_input 2 \
-#   --pretrained_checkpoint /path/to/checkpoint \
-#   --task_suite_name libero_spatial \
-#   --enable_cam True \
-#   --cam_mode activation \
-#   --cam_every_n_steps 10 \
-#   --cam_output_dir "./grad_cam_outputs/activation_mode"
+set -e
 
-# ========== Example 2: True Grad-CAM (slower, per action dimension) ==========
-# CUDA_VISIBLE_DEVICES=0 python experiments/robot/libero/run_libero_eval.py \
-#   --use_proprio True \
-#   --num_images_in_input 2 \
-#   --pretrained_checkpoint /path/to/checkpoint \
-#   --task_suite_name libero_spatial \
-#   --enable_cam True \
-#   --cam_mode grad_cam \
-#   --cam_every_n_steps 20 \
-#   --cam_action_dims "0,1,2,6" \
-#   --cam_output_dir "./grad_cam_outputs/grad_cam_mode"
+# Environment setup
+export TOKENIZERS_PARALLELISM=false
 
-# ========== Current Run: Activation CAM with perturbation ==========
+# Create output directories
+mkdir -p eval_logs
+mkdir -p grad_cam_outputs
+
+# =============================================================================
+# Configuration
+# =============================================================================
+
+# Model checkpoint
+CHECKPOINT="/mnt/nas/weights/vla-adapter-sf/outputs/configs+libero_spatial_no_noops+b24+lr-0.0002+lora-r64+dropout-0.0--image_aug--VLA-Adapter--libero_spatial_no_noops----10000_chkpt"
+
+# Task suite
+TASK_SUITE="libero_spatial"
+
+# CAM settings
+CAM_METHOD="eigencam"           # Options: eigencam, gradcam, hirescam, gradcam++, etc.
+CAM_EVERY_N_STEPS=10            # Generate CAM every N steps
+CAM_OUTPUT_DIR="./grad_cam_outputs/spatial_10k_${CAM_METHOD}"
+CAM_ACTION_DIMS="0,1,2,6"       # Which action dimensions to visualize (empty = default)
+
+# =============================================================================
+# Run Evaluation with CAM
+# =============================================================================
+
+echo "Starting evaluation with CAM visualization..."
+echo "  Method: ${CAM_METHOD}"
+echo "  Output: ${CAM_OUTPUT_DIR}"
+echo "  Every ${CAM_EVERY_N_STEPS} steps"
+
 CUDA_VISIBLE_DEVICES=0 python experiments/robot/libero/run_libero_eval.py \
   --use_proprio True \
   --num_images_in_input 2 \
   --use_film False \
-  --pretrained_checkpoint /mnt/nas/weights/vla-adapter-sf/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--VLA-Adapter-SF--libero_spatial_no_noops----15000_chkpt \
-  --task_suite_name libero_spatial \
+  --pretrained_checkpoint "${CHECKPOINT}" \
+  --task_suite_name "${TASK_SUITE}" \
   --use_pro_version True \
-  --num_trials_per_task 5 \
+  --num_trials_per_task 1 \
   --enable_cam True \
-  --cam_mode grad_cam \
-  --cam_every_n_steps 20 \
-  --cam_action_dims "0,1,2,6" \
-  --cam_output_dir "./grad_cam_outputs/spatial_15k_grad_cam" \
-  --agentview_pos_offset="0.0,0.0,0.0" \
-  --agentview_rpy_offset="0.0,0.0,0.0" \
-  --wrist_cam_pos_offset="0.0,0.0,0.0" \
-  --wrist_cam_rpy_offset="0.0,0.0,0.0" \
-  --table_height_offset="0.0" \
-  > eval_logs/Spatial-15k-cam.log 2>&1 &
+  --cam_mode "${CAM_METHOD}" \
+  --cam_every_n_steps ${CAM_EVERY_N_STEPS} \
+  --cam_action_dims "${CAM_ACTION_DIMS}" \
+  --cam_output_dir "${CAM_OUTPUT_DIR}" \
+  > eval_logs/cam_${CAM_METHOD}.log 2>&1 &
 
-echo "Evaluation with CAM visualization started. Check eval_logs/Spatial-15k-cam.log for progress."
-echo "CAM outputs will be saved to: ./grad_cam_outputs/spatial_15k_grad_cam/"
+PID=$!
+echo "Evaluation started with PID: ${PID}"
+echo "Check progress: tail -f eval_logs/cam_${CAM_METHOD}.log"
+echo "CAM outputs will be saved to: ${CAM_OUTPUT_DIR}"

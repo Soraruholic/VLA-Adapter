@@ -165,9 +165,9 @@ class GenerateConfig:
 
     # ========== [CAM VISUALIZATION] Configuration ==========
     enable_cam: bool = False                         # Enable CAM visualization during eval
-    cam_mode: str = "activation"                     # "activation" (fast) or "grad_cam" (accurate)
+    cam_mode: str = "eigencam"                     # CAM method: eigencam, gradcam, hirescam, gradcam++, xgradcam, layercam
     cam_output_dir: str = "./grad_cam_outputs"       # Output directory for CAM visualizations
-    cam_every_n_steps: int = 10                      # Generate CAM every N steps (1=every step)
+    cam_frames_per_episode: int = 5                  # Number of frames to sample per episode
     cam_action_dims: str = ""                        # Comma-separated action dims to visualize (empty=default)
 
 
@@ -494,19 +494,27 @@ def run_episode(
 
                 # ========== [CAM VISUALIZATION] Generate CAM ==========
                 if cam_visualizer is not None:
-                    step_idx = t - cfg.num_steps_wait
-                    original_images = [observation["full_image"]]
-                    if "wrist_image" in observation:
-                        original_images.append(observation["wrist_image"])
-                    cam_visualizer.generate_cam(
-                        inputs=None,  # Will be computed internally
-                        original_images=original_images,
-                        proprio=observation.get("state"),
-                        unnorm_key=cfg.unnorm_key,
-                        step_idx=step_idx,
-                        episode_idx=episode_idx,
-                        task_label=task_description,
-                    )
+                    try:
+                        step_idx = t - cfg.num_steps_wait
+                        original_images = [observation["full_image"]]
+                        if "wrist_image" in observation:
+                            original_images.append(observation["wrist_image"])
+                        # Prepare pixel values for CAM using the same method as get_action
+                        from PIL import Image
+                        pil_images = [Image.fromarray(img) for img in original_images]
+                        prompt = f"In: What action should the robot take to {task_description}?\nOut:"
+                        inputs = processor(text=[prompt] * len(pil_images), images=pil_images, return_tensors="pt")
+                        pixel_values = inputs["pixel_values"].to(model.device)
+                        
+                        cam_visualizer.generate_cam(
+                                            pixel_values=pixel_values,
+                                            original_images=original_images,
+                                            step_idx=step_idx,
+                                            episode_idx=episode_idx,
+                                            task_name=task_description,
+                                        )
+                    except Exception as e:
+                        pass  # Silently skip CAM if it fails
                 # ========== [END CAM VISUALIZATION] ==========
 
             # Get action from queue
@@ -599,6 +607,16 @@ def run_task(
             episode_idx=task_episodes,
             cam_visualizer=cam_visualizer,
         )
+        
+        # Generate CAM at end of episode
+        if cam_visualizer is not None:
+            try:
+                cam_visualizer.generate_episode_cam(
+                    total_steps=0,  # Not used, frames already collected
+                    episode_idx=task_episodes
+                )
+            except Exception as e:
+                print(f"[CAM] Error generating episode CAM: {e}")
 
         # Update counters
         task_episodes += 1
@@ -687,10 +705,9 @@ def eval_libero(cfg: GenerateConfig) -> float:
             action_dims = [int(d.strip()) for d in cfg.cam_action_dims.split(",") if d.strip()]
         cam_config = create_cam_config(
             enabled=True,
-            mode=cfg.cam_mode,
-            dataset_type="libero",
+            method=cfg.cam_mode,
             output_dir=cfg.cam_output_dir,
-            visualize_every_n_steps=cfg.cam_every_n_steps,
+            frames_per_episode=cfg.cam_frames_per_episode,
             num_views=cfg.num_images_in_input,
             action_dims_to_visualize=action_dims,
         )
@@ -701,7 +718,7 @@ def eval_libero(cfg: GenerateConfig) -> float:
             action_head=action_head,
             proprio_projector=proprio_projector,
         )
-        print(f"[CAM] Enabled CAM visualization: mode={cfg.cam_mode}, every {cfg.cam_every_n_steps} steps")
+        print(f"[CAM] Enabled CAM visualization: mode={cfg.cam_mode}, {cfg.cam_frames_per_episode} frames/episode")
     # ========== [END CAM VISUALIZATION] ==========
 
     # for name, param in model.named_parameters():
