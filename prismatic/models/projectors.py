@@ -408,3 +408,175 @@ class GlobalAlignProjector(nn.Module):
         else:
             raise NotImplementedError(f"Align loss type {self.align_loss_type} is not implemented.")
 
+
+class MultiLayerAlignProjector(nn.Module):
+    """
+    [MULTI-LAYER ALIGN] Multi-layer independent alignment projector.
+    Computes alignment loss between multiple corresponding layers of VGGT and VLA.
+    
+    Each layer pair (VGGT_layer_i, VLA_layer_i) has its own alignment loss,
+    and the final loss is a weighted sum of all layer-wise losses.
+    
+    Supports two modes:
+    - share_projector=True: All layer pairs share a single projector
+    - share_projector=False: Each layer pair has its own independent projector
+    
+    Args:
+        llm_dim: LLM hidden dimension
+        vggt_dim: VGGT feature dimension (2048 for concat, 1024 for frame/global only)
+        num_layers: Number of layer pairs to align
+        align_loss_type: Loss type for alignment ("cosine")
+        use_vlm_norm: Whether to apply LayerNorm to VLM embeddings before projection
+        num_views: Number of views (only used when share_view_projector=False)
+        share_projector: Whether to share projector across all layer pairs
+        share_view_projector: Whether to share projector across views within each layer
+    """
+    def __init__(
+            self, 
+            llm_dim: int, 
+            vggt_dim: int = 2048,
+            num_layers: int = 3,
+            align_loss_type: str = "cosine",
+            use_vlm_norm: bool = False,
+            num_views: int = 1,
+            share_projector: bool = True,
+            share_view_projector: bool = True,
+        ) -> None:
+        super().__init__()
+        self.llm_dim = llm_dim
+        self.vggt_dim = vggt_dim
+        self.num_layers = num_layers
+        self.align_loss_type = align_loss_type
+        self.num_views = num_views
+        self.share_projector = share_projector
+        self.share_view_projector = share_view_projector
+
+        if share_projector:
+            # Single shared projector for all layer pairs and views
+            self.fc1 = nn.Linear(self.llm_dim, self.vggt_dim, bias=True)
+            self.fc2 = nn.Linear(self.vggt_dim, self.vggt_dim, bias=True)
+            self.act_fn1 = nn.GELU()
+            self.vlm_norm = nn.LayerNorm(llm_dim) if use_vlm_norm else None
+        else:
+            # Separate projector for each layer pair
+            if share_view_projector:
+                # Each layer has one projector shared across views
+                self.projectors = nn.ModuleList([
+                    nn.Sequential(
+                        nn.LayerNorm(llm_dim) if use_vlm_norm else nn.Identity(),
+                        nn.Linear(llm_dim, vggt_dim, bias=True),
+                        nn.GELU(),
+                        nn.Linear(vggt_dim, vggt_dim, bias=True),
+                    ) for _ in range(num_layers)
+                ])
+            else:
+                # Each layer has separate projectors for each view
+                self.projectors = nn.ModuleList([
+                    nn.ModuleList([
+                        nn.Sequential(
+                            nn.LayerNorm(llm_dim) if use_vlm_norm else nn.Identity(),
+                            nn.Linear(llm_dim, vggt_dim, bias=True),
+                            nn.GELU(),
+                            nn.Linear(vggt_dim, vggt_dim, bias=True),
+                        ) for _ in range(num_views)
+                    ]) for _ in range(num_layers)
+                ])
+
+        self.initialize_weights()
+    
+    def initialize_weights(self):
+        def _basic_init(module):
+            if isinstance(module, nn.Linear):
+                torch.nn.init.xavier_uniform_(module.weight)
+                if module.bias is not None:
+                    nn.init.constant_(module.bias, 0)
+        self.apply(_basic_init)
+
+    def align_dimension(self, LLM_embedding: torch.Tensor, layer_idx: int = None) -> torch.Tensor:
+        """
+        Project LLM embeddings to VGGT feature dimension.
+        
+        Args:
+            LLM_embedding: [B, N*P, D_llm] or [B, P, D_llm]
+            layer_idx: Layer index (only used when share_projector=False)
+        """
+        if self.share_projector:
+            if hasattr(self, 'vlm_norm') and self.vlm_norm is not None:
+                LLM_embedding = self.vlm_norm(LLM_embedding)
+            projected_features = self.fc1(LLM_embedding)
+            projected_features = self.act_fn1(projected_features)
+            projected_features = self.fc2(projected_features)
+        else:
+            if self.share_view_projector:
+                # Use layer-specific projector
+                projected_features = self.projectors[layer_idx](LLM_embedding)
+            else:
+                # Use layer and view-specific projector
+                B, NP, D = LLM_embedding.shape
+                N = self.num_views
+                P = NP // N
+                LLM_embedding = LLM_embedding.reshape(B, N, P, D)
+                projected_list = []
+                for v in range(N):
+                    proj_v = self.projectors[layer_idx][v](LLM_embedding[:, v])  # [B, P, vggt_dim]
+                    projected_list.append(proj_v)
+                projected_features = torch.cat(projected_list, dim=1)  # [B, N*P, vggt_dim]
+        return projected_features
+    
+    def compute_align_loss_cosine(self, vision_hidden, vggt_hidden):
+        """
+        Compute cosine similarity loss between projected VLA tokens and VGGT features.
+        
+        Args:
+            vision_hidden: Projected VLA tokens [B, N*P, D]
+            vggt_hidden: VGGT features [B, N*P, D]
+        """
+        def mean_flat(x):
+            return torch.mean(x, dim=list(range(1, len(x.size()))))
+        
+        # Flatten if needed for per-sample loss computation
+        if len(vision_hidden.shape) == 4:
+            B, N, P, D = vision_hidden.shape
+            vision_hidden = vision_hidden.reshape(B, N * P, D)
+            vggt_hidden = vggt_hidden.reshape(B, N * P, D)
+        
+        align_loss = 0
+        bsz = vision_hidden.shape[0]
+        for _vision, _vggt in zip(vision_hidden, vggt_hidden):
+            _vision = torch.nn.functional.normalize(_vision, dim=-1)
+            _vggt = torch.nn.functional.normalize(_vggt, dim=-1)
+            align_loss += 1 - mean_flat((_vision * _vggt).sum(dim=-1))
+        align_loss /= bsz
+        return align_loss
+    
+    def forward(self, vla_hidden_list, vggt_hidden_list, loss_coeffs):
+        """
+        Compute multi-layer alignment loss.
+        
+        Args:
+            vla_hidden_list: List of VLA vision tokens for each layer, each [B, N*P, D_llm]
+            vggt_hidden_list: List of VGGT features for each layer, each [B, N*P, D_vggt]
+            loss_coeffs: List of loss coefficients for each layer pair
+        
+        Returns:
+            total_loss: Weighted sum of all layer-wise alignment losses
+            layer_losses: List of individual layer losses (for logging)
+        """
+        assert len(vla_hidden_list) == len(vggt_hidden_list) == len(loss_coeffs) == self.num_layers, \
+            f"Mismatch in number of layers: vla={len(vla_hidden_list)}, vggt={len(vggt_hidden_list)}, coeffs={len(loss_coeffs)}, expected={self.num_layers}"
+        
+        if self.align_loss_type == "cosine":
+            total_loss = torch.tensor(0.0, device=vla_hidden_list[0].device)
+            layer_losses = []
+            
+            for i, (vla_hidden, vggt_hidden, coeff) in enumerate(zip(vla_hidden_list, vggt_hidden_list, loss_coeffs)):
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    projected_vla = self.align_dimension(vla_hidden, layer_idx=i)
+                layer_loss = self.compute_align_loss_cosine(projected_vla, vggt_hidden).mean()
+                layer_losses.append(layer_loss)
+                total_loss = total_loss + coeff * layer_loss
+            
+            return total_loss, layer_losses
+        else:
+            raise NotImplementedError(f"Align loss type {self.align_loss_type} is not implemented.")
+

@@ -146,6 +146,13 @@ class FinetuneConfig:
     global_align_layer: int = -1                     # VGGT layer for global-level alignment (-1 = last layer)
     frame_loss_coeff: float = 0.5                    # Coefficient for frame-level alignment loss
     global_loss_coeff: float = 0.5                   # Coefficient for global-level alignment loss
+    
+    # ========== [SPATIAL FORCING] Multi-Layer Alignment Configuration ==========
+    use_multi_layer_align: bool = False              # If True, enables multi-layer alignment (layer-wise independent alignment)
+    multi_layer_vggt: str = "-3,-2,-1"               # VGGT layers for multi-layer alignment (comma-separated, e.g., "-3,-2,-1")
+    multi_layer_vla: str = "-3,-2,-1"                # VLA layers for multi-layer alignment (comma-separated, e.g., "-3,-2,-1")
+    multi_layer_coeffs: str = "0.2,0.3,0.5"          # Loss coefficients for each layer pair (comma-separated, e.g., "0.2,0.3,0.5")
+    share_multi_layer_projector: bool = True         # If True, share projector across all layer pairs; False uses per-layer projectors
 
     # ========== [ALOHA DELTA] Delta Action Configuration ==========
     use_aloha_delta: bool = False                    # If True, convert absolute actions to delta for ALOHA datasets
@@ -324,6 +331,10 @@ def run_forward_pass(
     align_projector=None,
     frame_align_projector=None,
     global_align_projector=None,
+    multi_layer_align_projector=None,
+    multi_layer_vggt_indices=None,
+    multi_layer_vla_indices=None,
+    multi_layer_loss_coeffs=None,
     preprocess_normed_images=None,
     custom_pooling=None,
     processor=None,
@@ -450,13 +461,15 @@ def run_forward_pass(
         align_loss = torch.tensor(0.0, device=device_id)
         frame_align_loss = torch.tensor(0.0, device=device_id)
         global_align_loss = torch.tensor(0.0, device=device_id)
+        multi_layer_losses = []  # For logging individual layer losses
         
-        # Check if spatial forcing is enabled (supports both legacy and dual-align modes)
+        # Check if spatial forcing is enabled (supports legacy, dual-align, and multi-layer modes)
         sf_enabled = cfg is not None and cfg.use_spatial_forcing and vggt is not None
-        sf_legacy_enabled = sf_enabled and not cfg.use_dual_align and align_projector is not None
-        sf_dual_enabled = sf_enabled and cfg.use_dual_align and frame_align_projector is not None and global_align_projector is not None
+        sf_multi_layer_enabled = sf_enabled and cfg.use_multi_layer_align and multi_layer_align_projector is not None
+        sf_legacy_enabled = sf_enabled and not cfg.use_dual_align and not cfg.use_multi_layer_align and align_projector is not None
+        sf_dual_enabled = sf_enabled and cfg.use_dual_align and not cfg.use_multi_layer_align and frame_align_projector is not None and global_align_projector is not None
         
-        if sf_legacy_enabled or sf_dual_enabled:
+        if sf_multi_layer_enabled or sf_legacy_enabled or sf_dual_enabled:
             # Extract single layer from VLA for alignment (different from the 24 layers used above)
             vla_hidden_for_align = output.hidden_states[cfg.vla_layers_align]  # [bs, seq_len, hidden_dim]
             
@@ -481,7 +494,40 @@ def run_forward_pass(
             H, W = original_img.shape[-2:]
             patch_h, patch_w = H // vggt.patch_size, W // vggt.patch_size
             
-            if sf_dual_enabled:
+            if sf_multi_layer_enabled:
+                # ========== [MULTI-LAYER ALIGN] Layer-wise Independent Alignment ==========
+                # Extract VLA hidden states for each specified layer
+                vla_hidden_list = []
+                for vla_layer_idx in multi_layer_vla_indices:
+                    vla_hidden = output.hidden_states[vla_layer_idx]  # [bs, seq_len, hidden_dim]
+                    vla_vision_hidden = vla_hidden[:, boi_ids:boi_ids + vision_length, :].clone()
+                    vla_hidden_list.append(vla_vision_hidden)
+                
+                # Extract VGGT features for each specified layer
+                vggt_hidden_list = []
+                for vggt_layer_idx in multi_layer_vggt_indices:
+                    vggt_layer_features = vggt_output["features"][vggt_layer_idx]  # [B, N, P+special, 2048]
+                    vggt_hidden = vggt_layer_features[:, :, patch_start_idx:, :]  # [B, N, P, 2048]
+                    
+                    # Spatial resampling to match VLA's vision token layout
+                    vggt_hidden_pooled = custom_pooling(
+                        vggt_hidden, 
+                        (patch_h, patch_w), 
+                        (H, W), 
+                        vla_hidden_list[0],  # Use first VLA hidden for shape reference
+                        cfg.pooling_func,
+                        cfg.use_vggt_pe
+                    )  # [B, N*P_vla, 2048]
+                    vggt_hidden_list.append(vggt_hidden_pooled)
+                
+                # Compute multi-layer alignment loss
+                align_loss, multi_layer_losses = multi_layer_align_projector(
+                    vla_hidden_list, 
+                    vggt_hidden_list, 
+                    multi_layer_loss_coeffs
+                )
+                
+            elif sf_dual_enabled:
                 # ========== [DUAL ALIGN] Separate Frame and Global Alignment ==========
                 # Extract frame features from specified layer (first 1024 dims)
                 frame_layer_features = vggt_output["features"][cfg.frame_align_layer]  # [B, N, P+special, 2048]
@@ -520,7 +566,7 @@ def run_forward_pass(
                 # Combined alignment loss
                 align_loss = cfg.frame_loss_coeff * frame_align_loss + cfg.global_loss_coeff * global_align_loss
                 
-            else:
+            elif sf_legacy_enabled:
                 # ========== [LEGACY] Concat Alignment ==========
                 agg_vggt_hidden = vggt_output["features"][cfg.vggt_layers_align]
                 vggt_hidden = agg_vggt_hidden[:, :, patch_start_idx:, :]  # [B, N, P, 2048]
@@ -552,7 +598,9 @@ def run_forward_pass(
         
         # Compute total loss
         if cfg is not None and cfg.use_spatial_forcing:
-            if cfg.use_dual_align:
+            if cfg.use_multi_layer_align:
+                loss = action_loss + align_loss  # align_loss already weighted by layer coeffs
+            elif cfg.use_dual_align:
                 loss = action_loss + align_loss  # align_loss already weighted by frame/global coeffs
             else:
                 loss = action_loss + cfg.align_loss_coeff * align_loss
@@ -567,6 +615,13 @@ def run_forward_pass(
                 "align_loss": align_loss.item() if (cfg and cfg.use_spatial_forcing) else 0.0,  # ========== [SPATIAL FORCING] Add align_loss to metrics ==========
             }
         )
+        
+        # Add multi-layer align specific metrics
+        if cfg is not None and cfg.use_spatial_forcing and cfg.use_multi_layer_align and multi_layer_losses:
+            layer_metrics = {}
+            for i, layer_loss in enumerate(multi_layer_losses):
+                layer_metrics[f"layer_{i}_align_loss"] = layer_loss.item()
+            metrics.update(layer_metrics)
         
         # Add dual-align specific metrics
         if cfg is not None and cfg.use_spatial_forcing and cfg.use_dual_align:
@@ -660,6 +715,7 @@ def save_training_checkpoint(
     align_projector=None,
     frame_align_projector=None,
     global_align_projector=None,
+    multi_layer_align_projector=None,
 ) -> None:
     """
     Save all training checkpoints including model components, LoRA adapter, and dataset statistics.
@@ -723,7 +779,12 @@ def save_training_checkpoint(
 
         # ========== [SPATIAL FORCING] Save AlignProjector(s) ==========
         if cfg.use_spatial_forcing:
-            if cfg.use_dual_align:
+            if cfg.use_multi_layer_align:
+                # Multi-layer align mode: save multi-layer projector
+                if multi_layer_align_projector is not None:
+                    torch.save(get_module(multi_layer_align_projector).state_dict(), checkpoint_dir / f"multi_layer_align_projector--{checkpoint_name_suffix}")
+                    print(f"[SPATIAL FORCING] Saved MultiLayerAlignProjector checkpoint")
+            elif cfg.use_dual_align:
                 # Dual-align mode: save frame and global projectors separately
                 if frame_align_projector is not None:
                     torch.save(get_module(frame_align_projector).state_dict(), checkpoint_dir / f"frame_align_projector--{checkpoint_name_suffix}")
@@ -793,6 +854,10 @@ def run_validation(
     align_projector=None,
     frame_align_projector=None,
     global_align_projector=None,
+    multi_layer_align_projector=None,
+    multi_layer_vggt_indices=None,
+    multi_layer_vla_indices=None,
+    multi_layer_loss_coeffs=None,
     preprocess_normed_images=None,
     custom_pooling=None,
     processor=None,
@@ -845,6 +910,10 @@ def run_validation(
                 align_projector=align_projector,
                 frame_align_projector=frame_align_projector,
                 global_align_projector=global_align_projector,
+                multi_layer_align_projector=multi_layer_align_projector,
+                multi_layer_vggt_indices=multi_layer_vggt_indices,
+                multi_layer_vla_indices=multi_layer_vla_indices,
+                multi_layer_loss_coeffs=multi_layer_loss_coeffs,
                 preprocess_normed_images=preprocess_normed_images,
                 custom_pooling=custom_pooling,
                 processor=processor,
@@ -1023,6 +1092,10 @@ def finetune(cfg: FinetuneConfig) -> None:
     align_projector = None
     frame_align_projector = None
     global_align_projector = None
+    multi_layer_align_projector = None
+    multi_layer_vggt_indices = None
+    multi_layer_vla_indices = None
+    multi_layer_loss_coeffs = None
     preprocess_normed_images = None
     custom_pooling = None
     
@@ -1038,17 +1111,23 @@ def finetune(cfg: FinetuneConfig) -> None:
         try:
             if distributed_state.is_main_process:
                 print(f"[SPATIAL FORCING] Initializing Spatial Forcing components...")
-                if cfg.use_dual_align:
+                if cfg.use_multi_layer_align:
+                    print(f"[SPATIAL FORCING] Mode: MULTI-LAYER ALIGN (layer-wise independent alignment)")
+                    print(f"[SPATIAL FORCING] VGGT layers: {cfg.multi_layer_vggt}")
+                    print(f"[SPATIAL FORCING] VLA layers: {cfg.multi_layer_vla}")
+                    print(f"[SPATIAL FORCING] Loss coeffs: {cfg.multi_layer_coeffs}")
+                    print(f"[SPATIAL FORCING] Share projector across layers: {cfg.share_multi_layer_projector}")
+                elif cfg.use_dual_align:
                     print(f"[SPATIAL FORCING] Mode: DUAL ALIGN (Frame + Global)")
                     print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, Frame_layer={cfg.frame_align_layer}, Global_layer={cfg.global_align_layer}")
                     print(f"[SPATIAL FORCING] Loss coeffs: frame={cfg.frame_loss_coeff}, global={cfg.global_loss_coeff}")
-                    print(f"[SPATIAL FORCING] Share frame projector: {cfg.share_frame_projector}")
+                    print(f"[SPATIAL FORCING] Share frame projector: {cfg.share_projector}")
                 else:
                     print(f"[SPATIAL FORCING] Mode: LEGACY (concat alignment)")
                     print(f"[SPATIAL FORCING] Config: VLA_layer={cfg.vla_layers_align}, VGGT_layer={cfg.vggt_layers_align}, loss_coeff={cfg.align_loss_coeff}")
             
             # Import from local spatial_forcing_components
-            from prismatic.models.projectors import AlignProjector, FrameAlignProjector, GlobalAlignProjector
+            from prismatic.models.projectors import AlignProjector, FrameAlignProjector, GlobalAlignProjector, MultiLayerAlignProjector
             from vggt.models.vggt import VGGT
             from vggt.utils.load_fn import preprocess_normed_images
             from prismatic.util.pooling_utils import custom_pooling
@@ -1078,7 +1157,42 @@ def finetune(cfg: FinetuneConfig) -> None:
         llm_hidden_size = get_module(vla).llm_dim
         vggt_hidden_size = 1024  # VGGT feature dimension (frame or global, each 1024)
         
-        if cfg.use_dual_align:
+        if cfg.use_multi_layer_align:
+            # ========== [MULTI-LAYER ALIGN] Initialize MultiLayerAlignProjector ==========
+            # Parse layer indices and coefficients from comma-separated strings
+            multi_layer_vggt_indices = [int(x.strip()) for x in cfg.multi_layer_vggt.split(",")]
+            multi_layer_vla_indices = [int(x.strip()) for x in cfg.multi_layer_vla.split(",")]
+            multi_layer_loss_coeffs = [float(x.strip()) for x in cfg.multi_layer_coeffs.split(",")]
+            
+            # Validate that all lists have the same length
+            num_layers = len(multi_layer_vggt_indices)
+            assert len(multi_layer_vla_indices) == num_layers, \
+                f"VGGT layers ({len(multi_layer_vggt_indices)}) and VLA layers ({len(multi_layer_vla_indices)}) must have same length"
+            assert len(multi_layer_loss_coeffs) == num_layers, \
+                f"Loss coefficients ({len(multi_layer_loss_coeffs)}) must match number of layers ({num_layers})"
+            
+            multi_layer_align_projector = MultiLayerAlignProjector(
+                llm_dim=llm_hidden_size,
+                vggt_dim=2 * vggt_hidden_size,  # 2048 for concat(frame, global)
+                num_layers=num_layers,
+                align_loss_type=cfg.align_loss_type,
+                use_vlm_norm=cfg.use_vlm_norm,
+                num_views=cfg.num_images_in_input,
+                share_projector=cfg.share_multi_layer_projector,
+                share_view_projector=cfg.share_projector,
+            ).to(device_id)
+            
+            if distributed_state.num_processes > 1:
+                multi_layer_align_projector = DDP(multi_layer_align_projector, device_ids=[device_id])
+            
+            if distributed_state.is_main_process:
+                print(f"[SPATIAL FORCING] MultiLayerAlignProjector initialized: {llm_hidden_size} -> {2 * vggt_hidden_size}")
+                print(f"[SPATIAL FORCING] Number of layer pairs: {num_layers}")
+                print(f"[SPATIAL FORCING] VGGT layer indices: {multi_layer_vggt_indices}")
+                print(f"[SPATIAL FORCING] VLA layer indices: {multi_layer_vla_indices}")
+                print(f"[SPATIAL FORCING] Loss coefficients: {multi_layer_loss_coeffs}")
+        
+        elif cfg.use_dual_align:
             # ========== [DUAL ALIGN] Initialize Frame and Global Projectors ==========
             frame_align_projector = FrameAlignProjector(
                 llm_dim=llm_hidden_size,
@@ -1204,7 +1318,11 @@ def finetune(cfg: FinetuneConfig) -> None:
     
     # ========== [SPATIAL FORCING] Add AlignProjector parameters to optimizer ==========
     if cfg.use_spatial_forcing:
-        if cfg.use_dual_align:
+        if cfg.use_multi_layer_align:
+            # Multi-layer align mode: add multi-layer projector
+            if multi_layer_align_projector is not None:
+                trainable_params += [param for param in multi_layer_align_projector.parameters() if param.requires_grad]
+        elif cfg.use_dual_align:
             # Dual-align mode: add both frame and global projectors
             if frame_align_projector is not None:
                 trainable_params += [param for param in frame_align_projector.parameters() if param.requires_grad]
@@ -1347,9 +1465,13 @@ def finetune(cfg: FinetuneConfig) -> None:
                 use_pro_version=cfg.use_pro_version,
                 cfg=cfg,
                 vggt=vggt if cfg.use_spatial_forcing else None,
-                align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align and not cfg.use_multi_layer_align) else None,
                 frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                 global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                multi_layer_align_projector=multi_layer_align_projector if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                multi_layer_vggt_indices=multi_layer_vggt_indices if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                multi_layer_vla_indices=multi_layer_vla_indices if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                multi_layer_loss_coeffs=multi_layer_loss_coeffs if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
                 preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
                 custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
                 processor=processor,
@@ -1415,9 +1537,10 @@ def finetune(cfg: FinetuneConfig) -> None:
                     train_dataset=train_dataset,
                     distributed_state=distributed_state,
                     new_state_dict=RAW_STATE_DICT,
-                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align and not cfg.use_multi_layer_align) else None,
                     frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                     global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                    multi_layer_align_projector=multi_layer_align_projector if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
                 )
 
             # Test model on validation set
@@ -1436,9 +1559,13 @@ def finetune(cfg: FinetuneConfig) -> None:
                     distributed_state=distributed_state,
                     val_time_limit=cfg.val_time_limit,
                     vggt=vggt if cfg.use_spatial_forcing else None,
-                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align) else None,
+                    align_projector=align_projector if (cfg.use_spatial_forcing and not cfg.use_dual_align and not cfg.use_multi_layer_align) else None,
                     frame_align_projector=frame_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
                     global_align_projector=global_align_projector if (cfg.use_spatial_forcing and cfg.use_dual_align) else None,
+                    multi_layer_align_projector=multi_layer_align_projector if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                    multi_layer_vggt_indices=multi_layer_vggt_indices if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                    multi_layer_vla_indices=multi_layer_vla_indices if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
+                    multi_layer_loss_coeffs=multi_layer_loss_coeffs if (cfg.use_spatial_forcing and cfg.use_multi_layer_align) else None,
                     preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
                     custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
                     processor=processor,
