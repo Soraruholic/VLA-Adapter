@@ -127,6 +127,9 @@ class FinetuneConfig:
     use_pro_version: bool = True                             # the version number
     phase: str = "Training"
     # fmt: on
+    
+    # Mixed precision dtype (bfloat16 or float16)
+    mixed_precision_dtype: str = "bfloat16"                  # Options: "bfloat16", "float16". Use float16 if bfloat16 is not supported.
 
     # ========== [SPATIAL FORCING] Configuration Parameters ==========
     vggt_path: str = "/home/icrlab02/vla_ws/VLA-Adapter/pretrained_models/vggt/model.pt"  # Path to VGGT model for spatial alignment
@@ -153,6 +156,16 @@ class FinetuneConfig:
     multi_layer_vla: str = "-3,-2,-1"                # VLA layers for multi-layer alignment (comma-separated, e.g., "-3,-2,-1")
     multi_layer_coeffs: str = "0.2,0.3,0.5"          # Loss coefficients for each layer pair (comma-separated, e.g., "0.2,0.3,0.5")
     share_multi_layer_projector: bool = True         # If True, share projector across all layer pairs; False uses per-layer projectors
+
+    # ========== [SPATIAL FORCING] Align Loss Coefficient Scheduler ==========
+    # Scheduler types: constant, step, linear, two_stage_linear, cosine, polynomial, exponential, sigmoid
+    align_coeff_scheduler: str = "constant"          # Scheduler type for align_loss_coeff
+    align_coeff_warmup_steps: int = 5000             # Warmup steps (for step/two_stage_linear: coeff=0 before this)
+    align_coeff_peak_step: int = 10000               # Step to reach peak value
+    align_coeff_peak_value: float = 0.5              # Peak coefficient value
+    align_coeff_power: float = 2.0                   # Power for polynomial scheduler
+    align_coeff_gamma: float = 5.0                   # Gamma for exponential scheduler
+    align_coeff_steepness: float = 10.0              # Steepness for sigmoid scheduler
 
     # ========== [ALOHA DELTA] Delta Action Configuration ==========
     use_aloha_delta: bool = False                    # If True, convert absolute actions to delta for ALOHA datasets
@@ -219,6 +232,100 @@ def get_run_id(cfg) -> str:
             run_id += f"--{cfg.run_id_note}"
     return run_id
 
+
+# ========== [SPATIAL FORCING] Align Loss Coefficient Scheduler Functions ==========
+def get_align_coeff(step: int, cfg) -> float:
+    """
+    Get the alignment loss coefficient at the current step based on scheduler type.
+    
+    Supported scheduler types:
+    - constant: Always returns align_loss_coeff (no scheduling)
+    - step: 0 before warmup_steps, then jump to peak_value
+    - linear: Linear increase from 0 to peak_value over peak_step steps
+    - two_stage_linear: 0 before warmup_steps, then linear increase to peak_value at peak_step
+    - cosine: Cosine curve from 0 to peak_value (S-shaped, slow-fast-slow)
+    - polynomial: Power function (progress^power), power>1 for slow start, power<1 for fast start
+    - exponential: Exponential increase, very slow start then rapid increase
+    - sigmoid: S-shaped curve with steep transition in the middle
+    
+    Args:
+        step: Current training step
+        cfg: FinetuneConfig with scheduler parameters
+        
+    Returns:
+        float: The alignment loss coefficient at this step
+    """
+    import math
+    
+    scheduler_type = cfg.align_coeff_scheduler
+    warmup_steps = cfg.align_coeff_warmup_steps
+    peak_step = cfg.align_coeff_peak_step
+    peak_value = cfg.align_coeff_peak_value
+    
+    # If scheduler is constant, just return the original align_loss_coeff
+    if scheduler_type == "constant":
+        return cfg.align_loss_coeff
+    
+    # Step scheduler: 0 before warmup_steps, then jump to peak_value
+    if scheduler_type == "step":
+        return peak_value if step >= warmup_steps else 0.0
+    
+    # Linear scheduler: linear increase from 0 to peak_value
+    if scheduler_type == "linear":
+        if step >= peak_step:
+            return peak_value
+        progress = step / peak_step
+        return peak_value * progress
+    
+    # Two-stage linear: 0 before warmup_steps, then linear increase
+    if scheduler_type == "two_stage_linear":
+        if step < warmup_steps:
+            return 0.0
+        elif step >= peak_step:
+            return peak_value
+        else:
+            progress = (step - warmup_steps) / (peak_step - warmup_steps)
+            return peak_value * progress
+    
+    # Cosine scheduler: S-shaped curve using cosine
+    if scheduler_type == "cosine":
+        if step >= peak_step:
+            return peak_value
+        progress = step / peak_step
+        return peak_value * (1 - math.cos(math.pi * progress)) / 2
+    
+    # Polynomial scheduler: progress^power
+    if scheduler_type == "polynomial":
+        power = cfg.align_coeff_power
+        if step >= peak_step:
+            return peak_value
+        progress = step / peak_step
+        return peak_value * (progress ** power)
+    
+    # Exponential scheduler: slow start, rapid increase at the end
+    if scheduler_type == "exponential":
+        gamma = cfg.align_coeff_gamma
+        if step >= peak_step:
+            return peak_value
+        progress = step / peak_step
+        return peak_value * (math.exp(gamma * progress) - 1) / (math.exp(gamma) - 1)
+    
+    # Sigmoid scheduler: S-shaped with steep middle transition
+    if scheduler_type == "sigmoid":
+        steepness = cfg.align_coeff_steepness
+        if step >= peak_step:
+            return peak_value
+        progress = step / peak_step
+        x = steepness * (progress - 0.5)
+        sigmoid_val = 1 / (1 + math.exp(-x))
+        sigmoid_min = 1 / (1 + math.exp(steepness * 0.5))
+        sigmoid_max = 1 / (1 + math.exp(-steepness * 0.5))
+        normalized = (sigmoid_val - sigmoid_min) / (sigmoid_max - sigmoid_min)
+        return peak_value * normalized
+    
+    # Default fallback
+    return cfg.align_loss_coeff
+# ========== [END SPATIAL FORCING SCHEDULER] ==========
 
 
 def load_checkpoint(module_name: str, path: str, step: int, device: str = "cpu") -> dict:
@@ -338,7 +445,8 @@ def run_forward_pass(
     preprocess_normed_images=None,
     custom_pooling=None,
     processor=None,
-    cfg=None
+    cfg=None,
+    current_step=0,
 ) -> Tuple[torch.Tensor, Dict[str, float]]:
     """
     Compute model forward pass and metrics for both training and validation.
@@ -367,16 +475,19 @@ def run_forward_pass(
     """
     metrics = {}
 
+    # Determine mixed precision dtype
+    mp_dtype = torch.bfloat16 if (cfg is None or cfg.mixed_precision_dtype == "bfloat16") else torch.float16
+
     # Get ground-truth action labels
-    ground_truth_actions = batch["actions"].to(device_id).to(torch.bfloat16)
+    ground_truth_actions = batch["actions"].to(device_id).to(mp_dtype)
     noise, noisy_actions, diffusion_timestep_embeddings = None, None, None
 
     # VLA forward pass
-    with torch.autocast("cuda", dtype=torch.bfloat16):
+    with torch.autocast("cuda", dtype=mp_dtype):
         output: CausalLMOutputWithPast = vla(
             input_ids=batch["input_ids"].to(device_id),
             attention_mask=batch["attention_mask"].to(device_id),
-            pixel_values=batch["pixel_values"].to(torch.bfloat16).to(device_id),
+            pixel_values=batch["pixel_values"].to(mp_dtype).to(device_id),
             labels=batch["labels"],
             output_hidden_states=True,
             proprio=batch["proprio"] if use_proprio else None,
@@ -441,8 +552,8 @@ def run_forward_pass(
             text_hidden_states = item[:, num_patches:-1]
             # Get hidden states for action portion of response
             batch_size = batch["input_ids"].shape[0]
-            # actions_hidden_states = text_hidden_states[:, -1, :].reshape(batch_size, 1, -1).to(torch.bfloat16)
-            actions_hidden_states = text_hidden_states[current_action_mask | next_actions_mask].reshape(batch_size, 1,NUM_TOKENS, -1).to(torch.bfloat16)
+            # actions_hidden_states = text_hidden_states[:, -1, :].reshape(batch_size, 1, -1).to(mp_dtype)
+            actions_hidden_states = text_hidden_states[current_action_mask | next_actions_mask].reshape(batch_size, 1,NUM_TOKENS, -1).to(mp_dtype)
             task_latten_states = item[:, :num_patches].reshape(batch_size, 1, num_patches , -1)
             all_hidden_states = torch.cat((task_latten_states, actions_hidden_states),2)
             multi_layer_hidden_states.append(all_hidden_states)
@@ -486,7 +597,7 @@ def run_forward_pass(
                 num_images_in_input=cfg.num_images_in_input
             ).to(device_id)
             
-            with torch.autocast("cuda", dtype=torch.bfloat16), torch.no_grad():
+            with torch.autocast("cuda", dtype=mp_dtype), torch.no_grad():
                 vggt_output = vggt(unnorm_imgs)
             
             patch_start_idx = vggt_output["patch_start_idx"]
@@ -597,13 +708,19 @@ def run_forward_pass(
         # ========== [END SPATIAL FORCING ALIGNMENT] ==========
         
         # Compute total loss
+        # Get scheduled align coefficient
+        scheduled_align_coeff = get_align_coeff(current_step, cfg) if cfg is not None else 0.0
+        
         if cfg is not None and cfg.use_spatial_forcing:
             if cfg.use_multi_layer_align:
-                loss = action_loss + align_loss  # align_loss already weighted by layer coeffs
+                # Multi-layer: apply scheduler to the weighted sum
+                loss = action_loss + scheduled_align_coeff * align_loss / cfg.align_coeff_peak_value if cfg.align_coeff_scheduler != "constant" else action_loss + align_loss
             elif cfg.use_dual_align:
-                loss = action_loss + align_loss  # align_loss already weighted by frame/global coeffs
+                # Dual-align: apply scheduler to the weighted sum
+                loss = action_loss + scheduled_align_coeff * align_loss / cfg.align_coeff_peak_value if cfg.align_coeff_scheduler != "constant" else action_loss + align_loss
             else:
-                loss = action_loss + cfg.align_loss_coeff * align_loss
+                # Legacy mode: use scheduled coefficient directly
+                loss = action_loss + scheduled_align_coeff * align_loss
         else:
             loss = action_loss
         
@@ -613,6 +730,7 @@ def run_forward_pass(
                 "loss_value": loss.item(),  # Detached value for logging
                 "action_loss": action_loss.item(),  # ========== [SPATIAL FORCING] Add action_loss to metrics ==========
                 "align_loss": align_loss.item() if (cfg and cfg.use_spatial_forcing) else 0.0,  # ========== [SPATIAL FORCING] Add align_loss to metrics ==========
+                "align_coeff": scheduled_align_coeff if (cfg and cfg.use_spatial_forcing) else 0.0,  # ========== [SPATIAL FORCING] Add scheduled coeff to metrics ==========
             }
         )
         
@@ -812,16 +930,17 @@ def save_training_checkpoint(
     # Merge LoRA weights into base model and save resulting model checkpoint
     # Note: Can be very slow on some devices; if so, we recommend merging offline
     if cfg.use_lora and cfg.merge_lora_during_training:
+        mp_dtype_merge = torch.bfloat16 if cfg.mixed_precision_dtype == "bfloat16" else torch.float16
         if cfg.use_minivlm:
             config = AutoConfig.from_pretrained("pretrained_models/configs/config.json")
-            base_vla = AutoModelForVision2Seq.from_config(config, torch_dtype=torch.bfloat16)  # Create a new model with configuration, the parameters are randomly initialized
+            base_vla = AutoModelForVision2Seq.from_config(config, torch_dtype=mp_dtype_merge)  # Create a new model with configuration, the parameters are randomly initialized
             # print(new_state_dict['action_queries.weight'])
             new_state_dict['action_queries.weight'] = vla.state_dict()['module.base_model.model.action_queries.weight'].cpu()
             missing_keys, unexpected_keys = base_vla.load_state_dict(new_state_dict, strict=False)
             
         else:
             base_vla = AutoModelForVision2Seq.from_pretrained(
-            cfg.config_file_path, torch_dtype=torch.bfloat16, low_cpu_mem_usage=False, trust_remote_code=False
+            cfg.config_file_path, torch_dtype=mp_dtype_merge, low_cpu_mem_usage=False, trust_remote_code=False
         )
 
 
@@ -917,6 +1036,7 @@ def run_validation(
                 preprocess_normed_images=preprocess_normed_images,
                 custom_pooling=custom_pooling,
                 processor=processor,
+                current_step=log_step,
             )
 
             # Add the loss value to the metrics
@@ -1044,7 +1164,8 @@ def finetune(cfg: FinetuneConfig) -> None:
                 load_for_training=True,
                 )
         config = AutoConfig.from_pretrained("pretrained_models/configs/config.json")
-        vla = AutoModelForVision2Seq.from_config(config, torch_dtype=torch.bfloat16).to(device_id)  # Create a new model with configuration, the parameters are randomly initialized
+        mp_dtype_init = torch.bfloat16 if cfg.mixed_precision_dtype == "bfloat16" else torch.float16
+        vla = AutoModelForVision2Seq.from_config(config, torch_dtype=mp_dtype_init).to(device_id)  # Create a new model with configuration, the parameters are randomly initialized
         # for name, param in model.named_parameters():
         #     print(f"{name}: {param.shape}")
         replace_map = [
@@ -1075,9 +1196,10 @@ def finetune(cfg: FinetuneConfig) -> None:
 
     else:
         RAW_STATE_DICT ={}
+        mp_dtype_init = torch.bfloat16 if cfg.mixed_precision_dtype == "bfloat16" else torch.float16
         vla = AutoModelForVision2Seq.from_pretrained(
             cfg.config_file_path,
-            torch_dtype=torch.bfloat16,
+            torch_dtype=mp_dtype_init,
             low_cpu_mem_usage=False,
             trust_remote_code=False,
             ).to(device_id)
@@ -1450,6 +1572,10 @@ def finetune(cfg: FinetuneConfig) -> None:
         for batch_idx, batch in enumerate(dataloader):
             # Compute training metrics and loss
             compute_diffusion_l1 = (cfg.use_l1_regression and batch_idx % cfg.diffusion_sample_freq == 0) or (cfg.use_diffusion and batch_idx % cfg.diffusion_sample_freq == 0)
+            # Compute gradient step for scheduler
+            gradient_step_idx = batch_idx // cfg.grad_accumulation_steps
+            current_log_step = gradient_step_idx if not cfg.resume else cfg.resume_step + gradient_step_idx
+            
             loss, metrics = run_forward_pass(
                 vla=vla,
                 action_head=action_head,
@@ -1475,6 +1601,7 @@ def finetune(cfg: FinetuneConfig) -> None:
                 preprocess_normed_images=preprocess_normed_images if cfg.use_spatial_forcing else None,
                 custom_pooling=custom_pooling if cfg.use_spatial_forcing else None,
                 processor=processor,
+                current_step=current_log_step,
             )
 
             # Normalize loss to account for gradient accumulation
